@@ -44,6 +44,18 @@ console.log("Email Type:", typeof email);
     });
   }
 
+  onGoogleSignIn(event: Event) {
+    event.preventDefault(); 
+    this.authService.googleSignIn().subscribe({
+      next: (user) => {
+        console.log('Google Sign-In successful, user:', user);
+      },
+      error: (err) => {
+        console.error('Google Sign-In error:', err);
+      }
+    });
+  }
+
   onLogout() {
     this.authService.logout().subscribe(() => {
       console.log('User Logged out');

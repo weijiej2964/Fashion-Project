@@ -2,21 +2,66 @@
     Welcome, {{ user.email }}!
     <button (click)="onLogout()">Logout</button>
   </div>
-  <ng-template #loggedOut>
-    <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
+  
+<ng-template #loggedOut>
+  <!-- Auth Container (holds both Sign Up and Login) -->
+  <div class="auth-container">
+    <!-- Sign Up Card -->
+    <div class="auth-card">
+      <h2>Sign Up</h2>
+      <form (ngSubmit)="onRegister(registerEmail.value, registerPassword.value, $event)">
+        <input #registerEmail type="email" placeholder="Email" required />
+        <input #registerPassword type="password" placeholder="Password" required />
+        <button type="submit" (click)="onRegister(registerEmail.value, registerPassword.value, $event)">
+          Sign Up
+        </button>
+      </form>
+      
+      <!-- OR Separator -->
+      <div class="or-section">
+        <span>OR</span>
+      </div>
+
+      <!-- Social Icons (example) -->
+      <div class="social-icons">
+        <!-- Replace with actual icons or buttons -->
+        <button (click)="onGoogleSignIn($event)">
+          <img src="../assets/google-icon.png" alt="Google" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Login Card -->
+    <div class="auth-card">
+      <h2>Login</h2>
+      <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
+        
+        <!-- "Remember Me" checkbox -->
+        <label class="remember-me">
+          <input type="checkbox" />
+          Remember Me?
+        </label>
+        
         <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">
-            Login
-          </button>
-      </form>
-      <form (ngSubmit)="onRegister(registerEmail.value, regsisterPassword.value, $event)">
-        <input #registerEmail type="email" placeholder="Email" required />
-        <input #regsisterPassword type="password" placeholder="Password" required />
-        <button type="submit" (click)="onRegister(registerEmail.value, regsisterPassword.value, $event)">
-            Register
-          </button>
+          Login
+        </button>
       </form>
       
-      
-  </ng-template>
+      <!-- OR Separator -->
+      <div class="or-section">
+        <span>OR</span>
+      </div>
+
+      <!-- Social Icons (example) -->
+      <div class="social-icons">
+        <!-- Replace with actual icons or buttons -->
+        <button (click)="onGoogleSignIn($event)">
+          <img src="../assets/google-icon.png" alt="Google" />
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+    

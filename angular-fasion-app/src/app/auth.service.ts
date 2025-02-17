@@ -5,7 +5,10 @@ import { Auth,
   signOut, 
   onAuthStateChanged, 
   User,
-  UserCredential } from '@angular/fire/auth';
+  UserCredential, 
+  signInWithPopup, 
+  GoogleAuthProvider
+} from '@angular/fire/auth';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
@@ -14,6 +17,7 @@ import { from, Observable } from 'rxjs';
 export class AuthService {
   constructor(private auth: Auth, private ngZone: NgZone) {}
 
+  //register w/ email
   register(email: string, password: string) {
     return from(new Promise((resolve, reject) => {
       createUserWithEmailAndPassword(this.auth, email, password)
@@ -27,6 +31,7 @@ export class AuthService {
     }));
   }
 
+  //login via email
   login(email: string, password: string) {
     console.log('Attempting Firebase login'); // Debugging log
   
@@ -41,6 +46,17 @@ export class AuthService {
           this.ngZone.run(() => reject(error));
         });
     }));
+  }
+
+  googleSignIn(): Observable<User | null> {
+    const provider = new GoogleAuthProvider();
+    return from(
+      signInWithPopup(this.auth, provider).then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        return result.user;
+      })
+    )
   }
   
 
