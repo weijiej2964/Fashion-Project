@@ -4,6 +4,7 @@ import { User } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 import { subscribeOn } from 'rxjs';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
