@@ -13,7 +13,7 @@ html, body {
     justify-content: center;
     align-items: flex-start;
     padding-top: 2rem;
-    background-color: #e8d0f0; /* or your background color */
+    background-color: #e8d0f0;
   }
   
   .auth-card {
@@ -43,7 +43,7 @@ html, body {
   
   .auth-card form button {
     padding: 0.75rem;
-    background-color: #7e57c2; /* adjust to your theme color */
+    background-color: #7e57c2; 
     color: #fff;
     border: none;
     border-radius: 4px;
