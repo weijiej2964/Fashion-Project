@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
 html, body {
     margin: 0; 
@@ -14,14 +15,16 @@ h1 {
   transform: translateX(-50%);
   font-size: 2rem;
   font-weight: bold;
-  font-family: "Playwrite IT Moderna", serif;
+  /* font-family: "Playwrite IT Moderna", serif; */
+  font-family: "Gowun Dodum", serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
 
 h2 {
   font-weight: bold;
-  font-family: "Playwrite IT Moderna", serif;
+  /* font-family: "Playwrite IT Moderna", serif; */
+  font-family: "Gowun Dodum", serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
@@ -41,6 +44,7 @@ h2 {
   
   .auth-card {
     background-color: #fff;
+    border: 2px solid #E3DEE3;
     border-radius: 8px;
     padding: 2rem;
     width: 300px;
@@ -68,10 +72,12 @@ h2 {
     padding: 0.75rem;
     background-color: #9D6C91; 
     color: #fff;
-    border: none;
+    border: 2px solid #884376;
     border-radius: 4px;
     cursor: pointer;
-    font-family: "Playwrite IT Moderna", serif;
+    /* font-family: "Roboto", serif; */
+    font-family: "Gowun Dodum", serif;
+    font-size: 18px;
 
   }
   
@@ -79,7 +85,8 @@ h2 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: "Roboto", serif;
+    /* font-family: "Roboto", serif; */
+    font-family: "Gowun Dodum", serif;
     font-optical-sizing: auto;
 
   }
@@ -89,15 +96,16 @@ h2 {
     justify-content: center;
     align-items: center;
     margin: 1rem 0;
-    font-weight: bold;
+    font-weight: 900;
     color: #000;
-    font-family: "Roboto", serif;
+    font-family: "Gowun Dodum", serif;
   }
   
   .social-icons {
     display: flex;
     gap: 1rem;
     justify-content: center;
+    
   }
   
   .social-icons button {
@@ -107,4 +115,14 @@ h2 {
     display: flex;
     align-items: center;
   }
+  
+  .social-icons button p {
+    position: relative;
+    right: 0;
+    gap: 200;
+    left: 900;
+    font-size: 16px;
+    color: #000;
+  }
+
   
