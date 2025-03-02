@@ -1,6 +1,4 @@
 
-import { User } from '@angular/fire/auth';
-import { CommonModule } from '@angular/common';
 import { initializeApp } from "firebase/app";
 import { getDatabase,ref,set } from "firebase/database";
 const firebaseConfig = {
