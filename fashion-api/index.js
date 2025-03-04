@@ -1,31 +1,29 @@
 // this is the main file for the api 
-// PACKAGE-LOCK.JSON: i put in firebase idek if that's the version we got
-// 2/24/25 comment: okay this doesn't work until firebase is actually in it's just placeholder 
-// 2/26/25 comment: okay delete eveyrthing with firestore sorry guys... but now i have to do this postgres stuff...
 // TO DO: connect with firebase auth to get token to only allow authorized users to make calls
-// TO DO: Set up Postman
-// TO DO: Set up Heroku
-// NOTE 2/26/25: only UPLOAD has the potential way of querying with PostgresSQL
+
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
 
 const express = require('express')
 // const Firestore = require('@google-cloud/firestore')
 const app = express()
 app.use(express.json()) // sends json data to PostMan
+
+const firebaseConfig = {
+    // ...
+    // The value of `databaseURL` depends on the location of the database
+    databaseURL: "https://fashion-project-e2aba-default-rtdb.firebaseio.com/:null",
+};
+
+// Initialize Firebase
+const firebase = initializeApp(firebaseConfig);
+// Initialize Realtime Database and get a reference to the service
+const database = getDatabase(app);
+
+
 const port = 3000
-// const server = process.env.PORT || 8080 // idk if this matters i see it everywhere tho
+const server = process.env.PORT || 8080 // idk if this matters i see it everywhere tho
 
-// POSTGRES stuff i can't test out rn
-// const { Client } = require('pg')
-
-// const con = new Client({
-//     host: "localhost",
-//     user: "postgres",
-//     port: 5432,
-//     password: "idk the password",
-//     database: "inventory"
-// })
-
-// con.connect().then(() => console.log("CONNECTED YAY"))
 
 // stuff that comes with express brah
 app.get('/', (req, res) => {
@@ -38,30 +36,36 @@ app.listen(port, () => {
 
 // no string patterns cause apparently they don't work on express 5 LOL
 // Uploads clothing image and any data associated with it, stores it into the database
-app.post('/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
+app.post('/:user_id/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
+    console.log(`POST request to upload clothes`)
     const data = {
         // need item id...
         // idea: gen random number based off of domains. keep checking if it doesn't exist and only stop if it's unique in the db for the user
-        clothing_name: req.body.clothing_name,
-        image: req.body.image,
+        uid: user_id,
+        item_id: req.body.item_id, // PLACEHOLDER for testing purposes
+        item_name: req.body.clothing_name,
+        item_desc: req.body.item_desc,
+        image_url: req.body.image_url,
+        image_blob: req.body.image_blob,
         category: req.body.category,
         tags: req.body.tags
     };
 
-
-    // sends the clothing data to the database. potential way to query wiht postgresql...
-    const table_name = 'IDK THE TABLE NAME'
-
-    const insert_query = `INSERT INTO ${table_name} (clothing_name,image,category,tags) VALUES ($1,$2,$3,$4)`
-    con.query(insert_query, data, (err, result) => {
-        if (err) {
-            res.send(err)
+    const refPath = "/" + user_id + "/inventory/upload/"
+    const userRef = firebase.database().ref(refPath)
+    userRef.set(
+        data,
+        function (error) {
+            if (error) {
+                res.send("Upload unsucessful." + error)
+            }
+            else {
+                res.send("Upload successful")
+            }
         }
-        else {
-            res.json({ status: 'success', data: { clothing: data } })
-            console.log(`Successfully uploaded clothes`)
-        }
-    })
+    );
+
+
 
     // await db.collection('inventory').doc().set(data) // placeholder if we use firestore. if we don't well...
     // res.json({ status: 'success', data: { clothing: data } })
@@ -71,7 +75,7 @@ app.post('/inventory/upload', async (req, res) => { // does this have to be asyn
 })
 
 // Returns JSON (?) of all clothing items for a user
-app.get('/inventory/:user_id', async (req, res) => {
+app.get('/:user_id/inventory/:user_id', async (req, res) => {
     // im not even too sure if this works like this when we do authentication but we move
     res.send('GET request to get clothing')
 
@@ -89,7 +93,7 @@ app.get('/inventory/:user_id', async (req, res) => {
 })
 
 // Returns JSON of a specific piece of clothing the user has in their inventory
-app.get('/inventory/:clothing_id', async (req, res) => {
+app.get('/:user_id/inventory/:clothing_id', async (req, res) => {
     res.send('GET request to get clothing information')
 
     const clothing_id = req.params.clothing_id;
@@ -106,7 +110,7 @@ app.get('/inventory/:clothing_id', async (req, res) => {
 })
 
 // Updates the data of a specific clothing from the user's inventory
-app.put('/inventory/:clothing_id', (req, res) => {
+app.put('/:user_id/inventory/:clothing_id', (req, res) => {
     res.send('PUT request to update clothing information')
 
     const clothing_id = req.params.clothing_id;
@@ -115,7 +119,7 @@ app.put('/inventory/:clothing_id', (req, res) => {
 })
 
 // Deletes the data of a specific clothing from the user's inventory
-app.delete('/inventory/:clothing_id', (req, res) => {
+app.delete('/:user_id/inventory/:clothing_id', (req, res) => {
     res.send('DELETE request to delete an item')
 
     const clothing_id = req.params.clothing_id;
@@ -124,7 +128,7 @@ app.delete('/inventory/:clothing_id', (req, res) => {
 })
 
 // Creates an outfit based off the keyword the user sends
-app.post('/inventory/shuffle/:keyword', (req, res) => {
+app.post('/:user_id/inventory/shuffle/:keyword', (req, res) => {
     res.send('POST request to shuffle an outfit')
 
     const keyword = req.params.keyword;
