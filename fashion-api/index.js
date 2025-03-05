@@ -1,12 +1,14 @@
 // this is the main file for the api 
 // TO DO: connect with firebase auth to get token to only allow authorized users to make calls
 
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+let { initializeApp } = require('firebase-admin/app')
+let { getDatabase, ref, set } = require('firebase/database')
 
 const express = require('express')
-// const Firestore = require('@google-cloud/firestore')
 const app = express()
+const firebase = require('firebase')
+// const bodyParser = require("body-parser")
+
 app.use(express.json()) // sends json data to PostMan
 
 // Your web app's Firebase configuration
@@ -21,7 +23,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(app);
 
