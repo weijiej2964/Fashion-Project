@@ -1,202 +1,127 @@
-html, body {
-    margin: 0; 
-    padding: 0; 
-    height: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+h1 {
+  position: absolute;
+  top: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  font-weight: bold;
+  /* font-family: "Playwrite IT Moderna", serif; */
+  font-family: "Gowun Dodum", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+h2 {
+  font-weight: bold;
+  /* font-family: "Playwrite IT Moderna", serif; */
+  font-family: "Gowun Dodum", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .auth-container {
-    min-height: 100vh;
-    width: 100%;
-    background-color: #D4A1FA;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 2rem;
-    background-color: #e8d0f0;
-  }
-  
-  .auth-card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 2rem;
-    width: 300px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  }
-  
-  .auth-card h2 {
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .auth-card form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .auth-card form input {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .auth-card form button {
-    padding: 0.75rem;
-    background-color: #7e57c2; 
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .remember-me {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .or-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem 0;
-    font-weight: bold;
-    color: #666;
-  }
-  
-  .social-icons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-  
-  .social-icons button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-    
-  .basic-container {
-    display: flex;
-    height: 69vh;
-    width: 60%;
-    position: absolute;
-    right: 0; /* Align to the right of the screen */
-    text-align: right;
-    background-color: #D4A1FA;
-    color: #fff;
-    border: 4px solid #433E79;
-    border-radius: 25px;
+  height: 100vh;
+  width: 100%;
+  /* background-color: #D4A1FA; */
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 9rem;
+  background-color: #E9C4E1;
+  box-sizing: border-box;
 }
 
-.inside-container {
-    height: 69vh;
-    width: 100%;
-    position: absolute;
-    right: 0; /* Align to the right of the screen */
-    top: 150px;
-    text-align: right;
-    background-color: hsl(0, 0%, 100%);
-    color: #fff;
-    border: 4px solid #433E79;
-    border-radius: 25px;
-    font-size: 16px;
-    color: #000;
+.auth-card {
+  background-color: #fff;
+  border: 2px solid #E3DEE3;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-.button-container {
-    height: 50px;
-    width: 100%;
-    position: absolute;
-    top: 110px;
-    text-align: center;
-    color: #fff;
+.auth-card h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-card form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.auth-card form button {
+  padding: 0.75rem;
+  background-color: #9D6C91;
+  color: #fff;
+  border: 2px solid #884376;
+  border-radius: 4px;
+  cursor: pointer;
+  /* font-family: "Roboto", serif; */
+  font-family: "Gowun Dodum", serif;
+  font-size: 18px;
+
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  /* font-family: "Roboto", serif; */
+  font-family: "Gowun Dodum", serif;
+  font-optical-sizing: auto;
+
+}
+
+.or-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
   font-weight: 900;
   color: #000;
   font-family: "Gowun Dodum", serif;
-right: 35px;
 }
 
-.search-container {
-    height: 300px;
-    width: 400px;
-    position: absolute;
-    top: 25px;
-    left: 25px;
-    text-align: center;
-    color: #fff;
-    font-weight: 900;
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+}
+
+.social-icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.social-icons button p {
+  position: relative;
+  right: 0;
+  gap: 200;
+  left: 900;
+  font-size: 16px;
   color: #000;
-  font-family: "Gowun Dodum", serif;
-}
-
-.button{
-  width: 100px;
-  height: 50px;
-  background-color: #b837af; 
-  color: #fff;
-  border: 2px solid #884376; 
-  border-radius: 10px; 
-  cursor: pointer;
-  font-family: "Gowun Dodum", serif;
-  text-align: center;
-  font-size: 18px;
-  margin-right: 30px; 
-}
-
-.button:focus{
-  width: 150px;
-  height: 50px;
-  background-color: #84247D; 
-  color: #fff;
-  border: 2px solid #884376;
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: "Gowun Dodum", serif;
-  text-align: center;
-  font-size: 18px;
-}
-
-input[type="text"] {
-  width: 700px;
-  height: 50px;
-  border: 2px solid #884376;
-  border-radius: 10px;
-  font-family: "Gowun Dodum", serif;
-  font-size: 18px;
-  text-align: center;
-}
-
-.icon-container {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  top : 80%;
-  left: 30%;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.shuffle-icon {
-  font-size: 24px;
-}
-
-.edit-icon {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  background-color: white;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 24px;
-  height: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
 }
