@@ -1,50 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-
 html, body {
     margin: 0; 
     padding: 0; 
     height: 100%;
 }
 
-h1 {
-  position: absolute;
-  top: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  font-weight: bold;
-  /* font-family: "Playwrite IT Moderna", serif; */
-  font-family: "Gowun Dodum", serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
-h2 {
-  font-weight: bold;
-  /* font-family: "Playwrite IT Moderna", serif; */
-  font-family: "Gowun Dodum", serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
 .auth-container {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
-    /* background-color: #D4A1FA; */
+    background-color: #D4A1FA;
     display: flex;
     gap: 2rem;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 9rem;
-    background-color: #E9C4E1;
-    box-sizing: border-box; 
+    padding-top: 2rem;
+    background-color: #e8d0f0;
   }
   
   .auth-card {
     background-color: #fff;
-    border: 2px solid #E3DEE3;
     border-radius: 8px;
     padding: 2rem;
     width: 300px;
@@ -70,25 +43,17 @@ h2 {
   
   .auth-card form button {
     padding: 0.75rem;
-    background-color: #9D6C91; 
+    background-color: #7e57c2; 
     color: #fff;
-    border: 2px solid #884376;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
-    /* font-family: "Roboto", serif; */
-    font-family: "Gowun Dodum", serif;
-    font-size: 18px;
-
   }
   
   .remember-me {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* font-family: "Roboto", serif; */
-    font-family: "Gowun Dodum", serif;
-    font-optical-sizing: auto;
-
   }
   
   .or-section {
@@ -96,33 +61,19 @@ h2 {
     justify-content: center;
     align-items: center;
     margin: 1rem 0;
-    font-weight: 900;
-    color: #000;
-    font-family: "Gowun Dodum", serif;
+    font-weight: bold;
+    color: #666;
   }
   
   .social-icons {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    
   }
   
   .social-icons button {
     background: none;
     border: none;
     cursor: pointer;
-    display: flex;
-    align-items: center;
   }
-  
-  .social-icons button p {
-    position: relative;
-    right: 0;
-    gap: 200;
-    left: 900;
-    font-size: 16px;
-    color: #000;
-  }
-
-  
+    
