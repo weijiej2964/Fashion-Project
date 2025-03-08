@@ -27,8 +27,6 @@ const database = getDatabase();
 const port = 3000
 const server = process.env.PORT || 8080 // idk if this matters i see it everywhere tho
 
-
-// stuff that comes with express brah
 app.get('/', (req, res) => {
     res.send('This is our Fashion API!')
 })
