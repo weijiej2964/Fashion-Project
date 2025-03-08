@@ -6,9 +6,7 @@ let { getDatabase, ref, set } = require('firebase/database')
 
 const express = require('express')
 const app = express()
-// app = initializeApp()
 const firebase = require('firebase/app')
-// const bodyParser = require("body-parser")
 
 app.use(express.json()) // sends json data to PostMan
 
@@ -26,7 +24,7 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
-// const database = getDatabase(app);
+const database = getDatabase();
 
 
 const port = 3000
@@ -44,39 +42,41 @@ app.listen(port, () => {
 
 // no string patterns cause apparently they don't work on express 5 LOL
 // Uploads clothing image and any data associated with it, stores it into the database
-app.post('/:user_id/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
-    console.log(`POST request to upload clothes`)
-    const data = {
-        // need item id...
-        // idea: gen random number based off of domains. keep checking if it doesn't exist and only stop if it's unique in the db for the user
-        uid: req.params.user_id,
-        item_id: req.body.item_id, // PLACEHOLDER for testing purposes
-        item_name: req.body.clothing_name,
-        item_desc: req.body.item_desc,
-        image_url: req.body.image_url,
-        image_blob: req.body.image_blob,
-        category: req.body.category,
-        tags: req.body.tags
-    };
 
-    const refPath = "/" + req.params.user_id + "/inventory/upload/"
-    const userRef = firebase.database().ref(refPath)
-    userRef.set(
-        data,
-        function (error) {
-            if (error) {
-                res.send("Upload unsucessful." + error)
-            }
-            else {
-                res.send("Upload successful")
-            }
-        }
-    );
+// TO DO: generate random number for item_id
+// TO DO: Take care of Firebase warning errors
+// TO DO: MORE ERROR HANDLING... make sure category is actually a category
+app.post('/:user_id/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
+    // im not even too sure if this works like this when we do authentication but we move
+
+    console.log(`POST request to upload clothes`)
+    try {
+        item_id = req.body.item_id
+        const data = {
+            uid: req.params.user_id,
+            item_id: item_id, // PLACEHOLDER for testing purposes
+            item_name: req.body.item_name,
+            item_desc: req.body.item_desc,
+            image_url: req.body.image_url,
+            image_blob: req.body.image_blob,
+            category: req.body.category,
+            tags: req.body.tags
+        };
+
+        const refPath = "/" + req.params.user_id + "/clothing/" + item_id + "/"
+        set(ref(database, refPath), data);
+
+    }
+    catch (err) {
+        res.send("Upload unsucessful. " + err)
+    }
+    res.send("Upload successful")
+
 
 })
 
 // // Returns JSON (?) of all clothing items for a user
-// app.get('/:user_id/inventory/:user_id', async (req, res) => {
+// app.get('/:user_id/inventory/', async (req, res) => {
 //     // im not even too sure if this works like this when we do authentication but we move
 //     res.send('GET request to get clothing')
 
