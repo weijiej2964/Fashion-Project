@@ -1,8 +1,38 @@
 <div *ngIf="user; else loggedOut">
-    Welcome, {{ user.email }}!
-    <button (click)="onLogout()">Logout</button>
+  Welcome, {{ user.email }}!
+  <button (click)="onLogout()">Logout</button>
+
+  <div class="icon-container">
+    <i class="shuffle-icon"><img src="../assets/shuffle.png" width="50" height="40" alt="shuffle-icon"></i>
+    <div class="edit-icon"></div>
   </div>
-  
+
+  <div class="basic-container">
+    <div class="search-container">
+      <!-- Search Bar -->
+      <div class="flex justify-center">
+        <input type="text" placeholder="Search..."
+          class="w-1/2 p-2 rounded-full border border-gray-300 focus:outline-none" />
+      </div>
+    </div>
+
+    <div class="button-container" style="display: flex; justify-content: flex-end;">
+      <!-- add justify-items: flex-end; if u like idk -->
+      <button class="button">Top</button>
+      <button class="button">Bottom</button>
+      <button class="button">Outerwear</button>
+      <button class="button">Accessory</button>
+      <button class="button">Shoes</button>
+    </div>
+
+    <div class="inside-container"> </div>
+    <!-- This is where clothes will be, on input from button and tag, show clothes-->
+  </div>
+
+
+</div>
+
+
 <ng-template #loggedOut>
   <!-- Auth Container (holds both Sign Up and Login) -->
   <div class="auth-container">
@@ -17,7 +47,7 @@
           Sign Up
         </button>
       </form>
-      
+
       <!-- OR Separator -->
       <div class="or-section">
         <span>OR</span>
@@ -27,7 +57,7 @@
       <div class="social-icons">
         <!-- Replace with actual icons or buttons -->
         <button (click)="onGoogleSignIn($event)">
-          <img src="../assets/google-icon.png" width="100" height="80"  alt="Google" />
+          <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
         </button>
       </div>
     </div>
@@ -38,18 +68,18 @@
       <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
-        
+
         <!-- "Remember Me" checkbox -->
         <label class="remember-me">
           <input type="checkbox" />
           Remember Me
         </label>
-        
+
         <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">
           Login
         </button>
       </form>
-      
+
       <!-- OR Separator -->
       <div class="or-section">
         <span>OR</span>
@@ -65,4 +95,3 @@
     </div>
   </div>
 </ng-template>
-    
