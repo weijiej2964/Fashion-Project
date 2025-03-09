@@ -1,0 +1,16 @@
+{
+  "name": "fashion-api",
+  "version": "1.0.0",
+  "description": "API for the the fashion app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "firebase": "^11.4.0",
+    "firebase-admin": "^13.1.0"
+  }
+}
