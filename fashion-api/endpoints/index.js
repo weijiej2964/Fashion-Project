@@ -63,7 +63,7 @@ app.post('/:user_id/inventory/upload', async (req, res) => { // does this have t
             tags: req.body.tags
         };
 
-        const refPath = "/" + req.params.user_id + "/clothing/" + item_id + "/"
+        const refPath = "/" + req.params.user_id + "/clothing/" + req.body.category + "/" + item_id + "/"
         set(ref(database, refPath), data);
 
     }
