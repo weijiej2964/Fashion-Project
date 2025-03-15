@@ -38,15 +38,16 @@ app.listen(port, () => {
 })
 
 // Deletes the data of a specific clothing from the user's inventory
-app.delete('/:user_id/inventory/:clothing_id', (req, res) => {
+app.delete('/:user_id/clothing/:category/:clothing_id', (req, res) => {
     res.send('DELETE request to delete an item')
 
-    // extracts user and clothing id from db
+    // extracts user id, catgeory, and clothing id from db
     const user_id = req.params.user_id;
     const clothing_id = req.params.clothing_id;
+    const category = req.params.category;
 
     // extract the location of specific item in db
-    const itemRef = ref(database, `${userId}/clothing/`);
+    const itemRef = ref(database, `${user_id}/clothing/${category}/${clothing_id}`);
 
     // removing item from bd
     remove(itemRef)
