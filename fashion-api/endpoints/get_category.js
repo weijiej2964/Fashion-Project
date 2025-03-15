@@ -1,9 +1,8 @@
 const { initializeApp } = require('firebase/app')
-let { getDatabase, ref, set } = require('firebase/database')
-
+let { getDatabase, ref, get, set } = require('firebase/database')
 const express = require('express')
+
 const app = express()
-const firebase = require('firebase/app')
 
 app.use(express.json()) // sends json data to PostMan
 
@@ -19,27 +18,37 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig); //admin
 // Initialize Realtime Database and get a reference to the service
-const database = getDatabase();
+const database = getDatabase(firebaseApp); //db
 
 
 const port = 3000
 const server = process.env.PORT || 8080 // idk if this matters i see it everywhere tho
 
-
-// stuff that comes with express brah
 app.get('/', (req, res) => {
     res.send('This is our Fashion API!')
 })
 
+// Returns JSON (?) of all clothing items for a user
+app.get('/:user_id/inventory/:category', async (req, res) => {
+    try{
+        const userId = req.params.user_id; 
+        const category = req.params.category;
+        const inventoryRef = ref(database, `${userId}/clothing/${category}`);
+        const snapshot = await get(inventoryRef);
+
+        if(!snapshot.exists()) {
+            return res.status(404).json({ message: 'Inventory not found'});
+        }
+
+        res.status(200).json(snapshot.val());
+    } catch (error) {
+        console.error('Error fetching inventory:', error);
+        res.status(500).json({ error: 'Internal Server Error'});
+    }
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
-})
-
-// Returns JSON (?) of clothing of a specific category
-app.get('/:user_id/inventory/category', async (req, res) => {
-    res.send('GET request to get clothing')
-
-
 })
