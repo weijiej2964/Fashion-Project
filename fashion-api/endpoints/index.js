@@ -2,7 +2,7 @@
 // TO DO: connect with firebase auth to get token to only allow authorized users to make calls
 
 const { initializeApp } = require('firebase/app')
-let { getDatabase, ref, set } = require('firebase/database')
+let { getDatabase, ref, set, push } = require('firebase/database')
 
 const express = require('express')
 const app = express()
@@ -43,10 +43,9 @@ app.listen(port, () => {
 // no string patterns cause apparently they don't work on express 5 LOL
 // Uploads clothing image and any data associated with it, stores it into the database
 
-// TO DO: generate random number for item_id
 // TO DO: Take care of Firebase warning errors
 // TO DO: MORE ERROR HANDLING... make sure category is actually a category
-app.post('/:user_id/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
+app.post('/:user_id/inventory/upload', (req, res) => { // does this have to be async? idk lets find out 
     // im not even too sure if this works like this when we do authentication but we move
     const Category = new Set(['tops', 'bottoms', 'shoes', 'hats', 'glasses', 'earrings', 'necklaces', 'bracelets', 'watches', 'rings'])
 
@@ -54,25 +53,28 @@ app.post('/:user_id/inventory/upload', async (req, res) => { // does this have t
     console.log(`POST request to upload clothes`)
     try {
         item_id = req.body.item_id
-        // category = (req.body.category).toLowerCase()
+        category = (req.body.category).toLowerCase()
 
-        // if (!Category.has(category)) {
-        //     throw "Given category is not valid"
-        // }
+        if (!Category.has(category)) {
+            throw "Given category is not valid"
+        }
 
         const data = {
-            uid: req.params.user_id,
-            item_id: item_id, // PLACEHOLDER for testing purposes
+            // uid: req.params.user_id,
             item_name: req.body.item_name,
             item_desc: req.body.item_desc,
             image_url: req.body.image_url,
             image_blob: req.body.image_blob,
-            category: req.body.category,
+            // category: category,
             tags: req.body.tags
         };
 
-        const refPath = "/" + req.params.user_id + "/clothing/" + req.body.category + "/" + item_id + "/"
-        set(ref(database, refPath), data);
+        // const refPath = "/" + req.params.user_id + "/clothing/" + req.body.category + "/" + item_id + "/"
+        const refPath = ref(database, `/${req.params.user_id}/clothing/${category}/`)
+
+        // set(ref(database, refPath), data);
+        const item = push(refPath)
+        set(item, data)
 
 
     }
