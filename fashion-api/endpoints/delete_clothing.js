@@ -46,7 +46,7 @@ app.delete('/:user_id/inventory/:clothing_id', (req, res) => {
     const clothing_id = req.params.clothing_id;
 
     // extract the location of specific item in db
-    const itemRef = ref(database, `users/${user_id}/inventory/${clothing_id}`);
+    const itemRef = ref(database, `${userId}/clothing/`);
 
     // removing item from bd
     remove(itemRef)
@@ -57,6 +57,7 @@ app.delete('/:user_id/inventory/:clothing_id', (req, res) => {
       .catch((error) => {
         // fails to delete
         console.error(`Error deleting clothing item`, error);
+        res.status(500).send(`Failed to delete clothing item.`);
       });
 
 })
