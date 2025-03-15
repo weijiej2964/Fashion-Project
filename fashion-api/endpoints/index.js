@@ -48,10 +48,18 @@ app.listen(port, () => {
 // TO DO: MORE ERROR HANDLING... make sure category is actually a category
 app.post('/:user_id/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
     // im not even too sure if this works like this when we do authentication but we move
+    const Category = new Set(['tops', 'bottoms', 'shoes', 'hats', 'glasses', 'earrings', 'necklaces', 'bracelets', 'watches', 'rings'])
+
 
     console.log(`POST request to upload clothes`)
     try {
         item_id = req.body.item_id
+        // category = (req.body.category).toLowerCase()
+
+        // if (!Category.has(category)) {
+        //     throw "Given category is not valid"
+        // }
+
         const data = {
             uid: req.params.user_id,
             item_id: item_id, // PLACEHOLDER for testing purposes
@@ -66,12 +74,12 @@ app.post('/:user_id/inventory/upload', async (req, res) => { // does this have t
         const refPath = "/" + req.params.user_id + "/clothing/" + req.body.category + "/" + item_id + "/"
         set(ref(database, refPath), data);
 
+
     }
     catch (err) {
         res.send("Upload unsucessful. " + err)
     }
     res.send("Upload successful")
-
 
 })
 
