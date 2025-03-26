@@ -28,7 +28,57 @@ h2 {
   font-optical-sizing: auto;
   font-style: normal;
 }
+/* .sparkle-toggle {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  } */
 
+  .sparkle-toggle{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: #E9C4E1;
+  }
+  /* Hidden checkbox */
+.sparkle-toggle input[type="checkbox"] {
+    display: none; /* Hides the checkbox element */
+}
+
+/* Toggle label (button style) */
+.sparkle-toggle label {
+    cursor: pointer;
+    display: inline-block;
+    width: 50px; /* Adjust for size */
+    height: 25px;
+    background-color: lightgray; /* Default background */
+    border-radius: 50px; /* Rounded edges for toggle appearance */
+    position: relative;
+    transition: background-color 0.3s ease-in-out; /* Smooth color change */
+}
+
+/* Circle inside the toggle (default position) */
+.sparkle-toggle label::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 19px;
+    height: 19px;
+    background-color: white; /* Default circle color */
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out; /* Smooth movement */
+}
+
+/* Checked state styles */
+.sparkle-toggle input[type="checkbox"]:checked + label {
+    background-color: green; /* Background color when toggled ON */
+}
+
+.sparkle-toggle input[type="checkbox"]:checked + label::before {
+    transform: translateX(25px); /* Moves the circle to the right */
+}
 .auth-container {
     height: 100vh;
     width: 100%;

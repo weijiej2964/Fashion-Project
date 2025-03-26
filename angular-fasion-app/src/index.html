@@ -6,8 +6,14 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script type="text/javascript">
+  <script id = "sparkle-script" type="text/javascript">
+    let isSparkleOn = false; // Global flag to track toggle state
 
+    document.onmousemove = function (e) {
+        if (!isSparkleOn) return; // Stop sparkles if toggle is OFF
+        y = e.pageY;
+        x = e.pageX;
+    };
     //I got the sparkle code from https://www.mf2fm.com/rv/dhtmltinkerbell.php
     // <![CDATA[
     var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
@@ -61,6 +67,7 @@
     }}
     
     function sparkle() {
+      if (!isSparkleOn) return; 
       var c;
       if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
         ox=x;

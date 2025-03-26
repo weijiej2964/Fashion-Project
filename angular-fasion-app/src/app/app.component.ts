@@ -63,7 +63,10 @@ console.log("Email Type:", typeof email);
       console.log('User Logged out');
     });
   }
+  
 }
+
+
 
 
 
