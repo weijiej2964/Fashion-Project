@@ -2,8 +2,7 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideHttpClient } from '@angular/common/http'; // lets us run API 
+import { provideAuth, getAuth } from '@angular/fire/auth'; 
 
 
 const firebaseConfig = {
@@ -18,9 +17,8 @@ const firebaseConfig = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(routes), 
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth()),
-    provideHttpClient() // for API
+    provideAuth(() => getAuth())
   ],
 };

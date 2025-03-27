@@ -5,11 +5,9 @@ const { initializeApp } = require('firebase/app')
 let { getDatabase, ref, set, push } = require('firebase/database')
 
 const express = require('express')
-const cors = require('cors') //to connect to frontend
 const app = express()
 const firebase = require('firebase/app')
 
-app.use(cors()) // to connect to frontend
 app.use(express.json()) // sends json data to PostMan
 
 // Your web app's Firebase configuration
@@ -35,8 +33,7 @@ const server = process.env.PORT || 8080 // idk if this matters i see it everywhe
 
 // stuff that comes with express brah
 app.get('/', (req, res) => {
-    var obj = JSON.parse('{"message": "This is our Fashion API!"}')
-    res.send(obj)
+    res.send('This is our Fashion API!')
 })
 
 app.listen(port, () => {

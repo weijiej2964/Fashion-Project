@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { CrudService } from './crud.service'; // to use the backend api
 import { subscribeOn } from 'rxjs';
 
 import { initializeApp } from "firebase/app";
@@ -14,11 +13,11 @@ import { initializeApp } from "firebase/app";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
   title = 'fashion-project';
   user: User | null = null;
 
-  constructor(private authService: AuthService, private crud: CrudService) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
   onRegister(email: string, password: string, event: Event) {
     event.preventDefault() // prevent page refresh
     console.log("Email:", email, "Length:", email.length);
-    console.log("Email Type:", typeof email);
+console.log("Email Type:", typeof email);
 
     this.authService.register(email, password).subscribe({
       next: (user) => console.log('User is Registered:', user),
@@ -48,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   onGoogleSignIn(event: Event) {
-    event.preventDefault();
+    event.preventDefault(); 
     this.authService.googleSignIn().subscribe({
       next: (user) => {
         console.log('Google Sign-In successful, user:', user);
@@ -64,21 +63,6 @@ export class AppComponent implements OnInit {
       console.log('User Logged out');
     });
   }
-
-  // API functions
-  // All the CRUD services the API provides
-  getItems() {
-    this.crud.getAll().subscribe((data) => {
-      console.log(data)
-    });
-  }
-
-  sendData(user_id: string, data: JSON) {
-    this.crud.uploadData(user_id, data).subscribe((response) => {
-      console.log(response)
-    })
-  }
-
 }
 
 
