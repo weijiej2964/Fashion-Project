@@ -1,0 +1,29 @@
+// /* 1️⃣ Import Angular Material theming */
+// @use '@angular/material' as mat;
+// @use '@angular/material/core' as mat-core;
+
+// /* 2️⃣ Define Primary, Accent, and Warn Palettes */
+// $my-primary: mat.define-palette(mat.$pink-palette, 700);  // Magenta shade
+// $my-accent: mat.define-palette(mat.$deep-purple-palette, A200);
+// $my-warn: mat.define-palette(mat.$red-palette);
+
+// /* 3️⃣ Define the Theme */
+// $my-theme: mat.define-light-theme((
+//   color: (
+//     primary: $my-primary,
+//     accent: $my-accent,
+//     warn: $my-warn
+//   )
+// ));
+
+// /* 4️⃣ Include Angular Material core styles */
+// @include mat.core();
+
+// /* 5️⃣ Apply Theme to all components */
+// @include mat.all-component-themes($my-theme);
+
+// /* Optional: Add custom styles */
+// .mat-dialog-container {
+//   background-color: white !important;
+//   color: black !important;
+// }

@@ -29,7 +29,7 @@
 // import { MatFormFieldModule } from '@angular/material/form-field';  // For form fields
 // import { MatInputModule } from '@angular/material/input';  // For input fields
 // import { DomSanitizer, SafeUrl } from '@angular/platform-browser'; 
-import { Component } from '@angular/core';
+import { Component,ViewEncapsulation  } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -55,7 +55,9 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';  // SafeUrl f
     MatOptionModule
   ],
   templateUrl: './modal-popup.component.html',
-  styleUrls: ['./modal-popup.component.css','styles.css']
+  styleUrls: ['./modal-popup.component.css','styles.css'],
+  
+  encapsulation: ViewEncapsulation.None
 })
 export class ModalPopupComponent {
   itemName: string = '';

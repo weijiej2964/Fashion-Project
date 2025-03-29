@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import './modal-popup.component.css';  // Inside modal-popup.component.ts
 
 @Component({
   selector: 'app-sign-up-panel',

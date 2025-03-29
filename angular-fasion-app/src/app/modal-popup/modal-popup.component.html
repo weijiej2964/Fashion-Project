@@ -1,38 +1,32 @@
-<h2 mat-dialog-title>Add New Item</h2>
+<!-- modal-popup.component.html -->
+<div class="modal-content">
+    <form (ngSubmit)="submitForm()" class="form-container">
+      <mat-form-field class="centered-field">
+        <mat-label>Item Name</mat-label>
+        <input matInput [(ngModel)]="itemName" name="itemName" required />
+      </mat-form-field>
+  
+      <mat-form-field class="centered-field">
+        <mat-label>Item Description</mat-label>
+        <textarea matInput [(ngModel)]="itemDescription" name="itemDescription"></textarea>
+      </mat-form-field>
+  
+      
+  
+      <mat-form-field class="centered-field">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="selectedCategory" name="category">
+          <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <input type="file" (change)="onImageUpload($event)" accept=".jpg, .jpeg, .png" />
 
-<form (ngSubmit)="submitForm()" #itemForm="ngForm">
-  <mat-form-field appearance="fill">
-    <mat-label>Item Name</mat-label>
-    <input matInput [(ngModel)]="itemName" name="itemName" required />
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Item Description</mat-label>
-    <textarea matInput [(ngModel)]="itemDescription" name="itemDescription" required></textarea>
-  </mat-form-field>
-
-  <!-- <mat-form-field appearance="fill">
-    <mat-label>Item Price</mat-label>
-    <input matInput type="number" [(ngModel)]="itemPrice" name="itemPrice" required />
-  </mat-form-field> -->
-
-  <mat-form-field appearance="fill">
-    <mat-label>Category</mat-label>
-    <mat-select [(ngModel)]="selectedCategory" name="selectedCategory" required>
-      <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div>
-    <label for="image-upload">Upload Image</label>
-    <input type="file" id="image-upload" (change)="onImageUpload($event)" />
-    <div *ngIf="imageUrl">
-      <img [src]="imageUrl" alt="Image preview" width="100" height="100" />
-    </div>
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button mat-button (click)="closeModal()">Close</button>
+        <button mat-button type="submit">Submit</button>
+      </div>
+    </form>
   </div>
-
-  <div mat-dialog-actions>
-    <button mat-button type="button" (click)="closeModal()">Cancel</button>
-    <button mat-button type="submit" [disabled]="!itemForm.form.valid">Submit</button>
-  </div>
-</form>
+  

@@ -1,29 +1,81 @@
-::ng-deep .mat-dialog-container {
-    background-color: #fff !important; /* White background */
-    border-radius: 8px; /* Optional: add rounded corners */
-    padding: 20px; /* Optional: add some padding inside the modal */
-  }
-  
-  ::ng-deep .mat-dialog-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  ::ng-deep .mat-form-field {
-    width: 100%; /* Make sure form fields are 100% width */
-  }
-  
-  ::ng-deep .mat-dialog-actions {
+modal-popup.component.css
+
+/* Centering the modal content container */
+.modal-content {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100%; /* Ensure it takes up the full height */
   }
   
-  ::ng-deep .mat-button {
-    color: #1976d2; /* Customize button color */
+  /* Centering the form */
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Set max width for better control */
   }
   
-  ::ng-deep .mat-dialog-close {
-    color: #f44336; /* Customize close button color */
+  /* Center individual form fields */
+  .centered-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Optional: Styling for the action buttons */
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+/* modal-popup.component.css */
+
+/* Change background color for the mat-select dropdown */
+.mat-select-panel {
+    background-color: #fff !important; /* Set to white or any color you prefer */
+  }
+  
+  /* Optional: Change the background color of the selected option */
+  .mat-select-value {
+    background-color: #f0f0f0; /* Light background for selected value */
+  }
+  
+  /* Customize the mat-option background on hover */
+  .mat-option:hover {
+    background-color: #1976d2 !important; /* Highlight on hover with a color of your choice */
+    color: white !important; /* Change text color to white when hovered */
+  }
+  
+  /* Optional: Change the background color of the focused item */
+  .mat-option.mat-selected {
+    background-color: #1976d2 !important;
+    color: white !important;
+  }
+    
+  /* Round the corners of the modal for this specific component */
+.mat-dialog-container {
+    border-radius: 16px; /* Adjust the value as needed */
+  }
+  
+
+  /* Ensure mat-select dropdown panel has a solid background */
+::ng-deep .mat-select-panel {
+    background-color: #ffffff !important; /* Set solid white background */
+    border-radius: 8px !important;         /* Optional: rounded corners */
+  }
+  
+  /* Ensure mat-option items have a solid background */
+  ::ng-deep .mat-option {
+    background-color: #ffffff !important; /* Set solid white background */
+    color: #000000 !important;            /* Set text color to black */
+  }
+  
+  /* Optional: Change background color of mat-option on hover */
+  ::ng-deep .mat-option:hover {
+    background-color: #f0f0f0 !important; /* Light grey on hover */
   }
   
