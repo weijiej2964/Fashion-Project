@@ -21,6 +21,7 @@ import { switchMap } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'fashion-project';
   user: User | null = null;
+  isSignUp: boolean = false; // Or true, depending on your initial state
 
 
   selectedCategory: string = 'top'; //default category
@@ -32,6 +33,14 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService, private apiService: ApiService) { };
 
   ngOnInit() {
+  }
+
+  switchToLogin() {
+    this.isSignUp = false;
+  }
+
+  switchToSignup() {
+    this.isSignUp = true;
   }
 
   onRegister(email: string, password: string, event: Event) {
