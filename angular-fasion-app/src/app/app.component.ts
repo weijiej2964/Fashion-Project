@@ -16,6 +16,12 @@ import { initializeApp } from "firebase/app";
 export class AppComponent implements OnInit{
   title = 'fashion-project';
   user: User | null = null;
+  isSignUp = true; // Default to Sign Up view
+  isLoginMode = true; // Default to login mode
+
+  toggleMode(mode: boolean) {
+    this.isLoginMode = mode;
+  }
 
   constructor(private authService: AuthService) {}
 
@@ -23,6 +29,10 @@ export class AppComponent implements OnInit{
     this.authService.getUser().subscribe(user => {
       this.user = user;
     });
+  }
+
+  toggleAuthForm() {
+    this.isSignUp = !this.isSignUp; // Switch between Sign Up and Login
   }
 
   onRegister(email: string, password: string, event: Event) {
