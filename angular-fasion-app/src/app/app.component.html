@@ -61,60 +61,60 @@
     <div *ngIf="isSignUp" class="auth-card">
       <h2>Sign Up</h2>
       <!-- Toggle between Sign Up and Login -->
-    <div class="toggle-buttons">
-      <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
-      <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
-    </div>
+      <div class="toggle-buttons">
+        <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
+        <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
+      </div>
       <form (ngSubmit)="onRegister(registerEmail.value, registerPassword.value, $event)">
         <input #registerEmail type="email" placeholder="Email" required />
         <input #registerPassword type="password" placeholder="Password" required />
-        <button type="submit">Sign Up</button>
+        <button type="submit" (click)="onRegister(registerEmail.value, registerPassword.value, $event)">Sign Up</button>
       </form>
       <!-- OR Separator -->
-    <div class="or-section">
-      <span>OR</span>
+      <div class="or-section">
+        <span>OR</span>
+      </div>
+
+      <!-- Social Icons (example) -->
+      <div class="social-icons">
+        <!-- Replace with actual icons or buttons -->
+        <button (click)="onGoogleSignIn($event)">
+          <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
+        </button>
+      </div>
     </div>
 
-    <!-- Social Icons (example) -->
-    <div class="social-icons">
-      <!-- Replace with actual icons or buttons -->
-      <button (click)="onGoogleSignIn($event)">
-        <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
-      </button>
-    </div>
-    </div>
-  
     <!-- Login Form -->
     <div *ngIf="!isSignUp" class="auth-card">
       <h2>Login</h2>
       <!-- Toggle between Sign Up and Login -->
-    <div class="toggle-buttons">
-      <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
-      <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
-    </div>
+      <div class="toggle-buttons">
+        <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
+        <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
+      </div>
       <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
         <label>
           <input type="checkbox" /> Remember Me
         </label>
-        <button type="submit">Login</button>
+        <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
       </form>
       <!-- OR Separator -->
-    <div class="or-section">
-      <span>OR</span>
+      <div class="or-section">
+        <span>OR</span>
+      </div>
+
+      <!-- Social Icons (example) -->
+      <div class="social-icons">
+        <!-- Replace with actual icons or buttons -->
+        <button (click)="onGoogleSignIn($event)">
+          <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
+        </button>
+      </div>
     </div>
 
-    <!-- Social Icons (example) -->
-    <div class="social-icons">
-      <!-- Replace with actual icons or buttons -->
-      <button (click)="onGoogleSignIn($event)">
-        <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
-      </button>
-    </div>
-    </div>
 
-    
   </div>
-  
+
 </ng-template>
