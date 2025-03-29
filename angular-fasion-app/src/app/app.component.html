@@ -7,11 +7,13 @@
     <div class="edit-icon"></div>
   </div>
 
-  <button class="icon-button add-container" id="addPopup">
+ 
+  <button mat-button (click)="openModal()" id = "add-icon"><img src="../assets/add-icon.png" width="50" height="40" alt="Add icon"></button> 
+  <!-- <button class="icon-button add-container" id="addPopup">
     <img src="../assets/add-icon.png" width="50" height="40" alt="Add icon">
-  </button>
+  </button> -->
   
-  <div id="add-popup" class="popup">
+  <!-- <div id="add-popup" class="popup">
     <div class="popup-content">
       <span id="closePopupBtn" class="close-btn">&times;</span>
       <h2>Enter Item Information</h2>
@@ -35,9 +37,9 @@
         <button type="submit">Submit</button>
       </form>
     </div>
-  </div>
+  </div> -->
   
-  <script src="add-popup.js"></script> <!-- Link to the JS file -->
+  <!-- <script src="add-popup.js"></script> Link to the JS file -->
   
 
   <div class="basic-container">

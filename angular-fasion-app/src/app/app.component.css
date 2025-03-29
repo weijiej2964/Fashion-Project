@@ -267,7 +267,7 @@ input[type="text"] {
   font-size: 18px;
   text-align: center;
 }
-.add-container {
+#add-icon {
   position: absolute;
   width: 100px;
   height: 100px;

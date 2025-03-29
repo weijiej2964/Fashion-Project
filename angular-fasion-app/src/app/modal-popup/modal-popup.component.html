@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Add New Item</h2>
+
+<form (ngSubmit)="submitForm()" #itemForm="ngForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Item Name</mat-label>
+    <input matInput [(ngModel)]="itemName" name="itemName" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Item Description</mat-label>
+    <textarea matInput [(ngModel)]="itemDescription" name="itemDescription" required></textarea>
+  </mat-form-field>
+
+  <!-- <mat-form-field appearance="fill">
+    <mat-label>Item Price</mat-label>
+    <input matInput type="number" [(ngModel)]="itemPrice" name="itemPrice" required />
+  </mat-form-field> -->
+
+  <mat-form-field appearance="fill">
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="selectedCategory" name="selectedCategory" required>
+      <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <label for="image-upload">Upload Image</label>
+    <input type="file" id="image-upload" (change)="onImageUpload($event)" />
+    <div *ngIf="imageUrl">
+      <img [src]="imageUrl" alt="Image preview" width="100" height="100" />
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button type="button" (click)="closeModal()">Cancel</button>
+    <button mat-button type="submit" [disabled]="!itemForm.form.valid">Submit</button>
+  </div>
+</form>

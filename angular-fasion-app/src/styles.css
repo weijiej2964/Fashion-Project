@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Global style to modify Angular Material Dialog */
+.mat-dialog-container {
+    background-color: #fff !important;  /* White background */
+    border-radius: 8px !important;      /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Soft shadow */
+    color: #333 !important;             /* Text color */
+  }
+  
+  
