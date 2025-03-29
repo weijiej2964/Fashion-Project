@@ -40,7 +40,11 @@ font-style: normal;
   align-items: flex-start;
   padding-top: 9rem;
   background-color: #E9C4E1;
+<<<<<<< HEAD
   box-sizing: border-box;
+=======
+  box-sizing: border-box; 
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
 }
 
 .auth-card {
@@ -71,7 +75,11 @@ font-style: normal;
 
 .auth-card form button {
   padding: 0.75rem;
+<<<<<<< HEAD
   background-color: #9D6C91;
+=======
+  background-color: #9D6C91; 
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   color: #fff;
   border: 2px solid #884376;
   border-radius: 4px;
@@ -90,7 +98,6 @@ font-style: normal;
   font-optical-sizing: auto;
 
 }
-
 .or-section {
   display: flex;
   justify-content: center;
@@ -105,7 +112,10 @@ font-style: normal;
   display: flex;
   gap: 1rem;
   justify-content: center;
+<<<<<<< HEAD
   
+=======
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
 }
 
 .social-icons button {
@@ -162,8 +172,12 @@ font-style: normal;
   height: 69vh;
   width: 60%;
   position: absolute;
+<<<<<<< HEAD
   right: 0;
   /* Align to the right of the screen */
+=======
+  right: 0; /* Align to the right of the screen */
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   text-align: right;
   background-color: #D4A1FA;
   color: #fff;
@@ -175,10 +189,17 @@ font-style: normal;
   height: 69vh;
   width: 100%;
   position: absolute;
+<<<<<<< HEAD
   right: 0;
   /* Align to the right of the screen */
   margin-top: 150px;
   text-align: left;
+=======
+  right: 0; /* Align to the right of the screen */
+  top: 150px;
+  text-align: right;
+
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   background-color: hsl(0, 0%, 100%);
   color: #fff;
   border: 4px solid #433E79;
@@ -194,10 +215,18 @@ font-style: normal;
   top: 110px;
   text-align: center;
   color: #fff;
+<<<<<<< HEAD
   font-weight: 900;
   color: #000;
   font-family: "Gowun Dodum", serif;
   right: 35px;
+=======
+font-weight: 900;
+color: #000;
+font-family: "Gowun Dodum", serif;
+right: 35px;
+
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
 }
 
 .search-container {
@@ -213,7 +242,11 @@ font-style: normal;
   font-family: "Gowun Dodum", serif;
 }
 
+<<<<<<< HEAD
 .button {
+=======
+  .button{
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   width: 100px;
   height: 50px;
   background-color: #b837af;
@@ -224,10 +257,17 @@ font-style: normal;
   font-family: "Gowun Dodum", serif;
   text-align: center;
   font-size: 18px;
+<<<<<<< HEAD
   margin-right: 30px;
 }
 
 .button:focus {
+=======
+  margin-right: 30px; 
+  }
+
+  .button:focus{
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   width: 150px;
   height: 50px;
   background-color: #84247D;
@@ -251,6 +291,10 @@ font-style: normal;
   }
 
 .icon-container {
+<<<<<<< HEAD
+=======
+
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   position: absolute;
   width: 100px;
   height: 100px;
@@ -269,6 +313,10 @@ font-size: 24px;
 }
 
 .edit-icon {
+<<<<<<< HEAD
+=======
+
+>>>>>>> e667f1e51c967373e06a62a43670d4b7fd0783bc
   position: absolute;
   top: 0px;
   right: 0px;
