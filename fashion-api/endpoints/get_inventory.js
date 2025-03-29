@@ -1,9 +1,15 @@
 const { initializeApp } = require('firebase/app')
-let { getDatabase, ref, set } = require('firebase/database')
-
+let { getDatabase, ref, get, set } = require('firebase/database')
 const express = require('express')
+const cors = require('cors');
+
 const app = express()
-const firebase = require('firebase/app')
+
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    credentials: true // Allow cookies and authentication
+}))
 
 app.use(express.json()) // sends json data to PostMan
 
@@ -19,9 +25,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig); //admin
 // Initialize Realtime Database and get a reference to the service
-const database = getDatabase();
+const database = getDatabase(firebaseApp); //db
 
 
 const port = 3000
@@ -31,15 +37,24 @@ app.get('/', (req, res) => {
     res.send('This is our Fashion API!')
 })
 
+// Returns JSON (?) of all clothing items for a user
+app.get('/:user_id/inventory', async (req, res) => {
+    try {
+        const userId = req.params.user_id;
+        const inventoryRef = ref(database, `${userId}/clothing/`);
+        const snapshot = await get(inventoryRef);
+
+        if (!snapshot.exists()) {
+            return res.status(404).json({ message: 'Inventory not found' });
+        }
+
+        res.status(200).json(snapshot.val());
+    } catch (error) {
+        console.error('Error fetching inventory:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-
-// Returns JSON (?) of all clothing items for a user
-app.get('/:user_id/inventory/', async (req, res) => {
-    // im not even too sure if this works like this when we do authentication but we move
-    res.send('GET request to get clothing')
-
-
-})
-
