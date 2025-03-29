@@ -267,6 +267,19 @@ input[type="text"] {
   font-size: 18px;
   text-align: center;
 }
+.add-container {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 70%; /* Adjust this value to move it higher */
+  left: 30%; /* Same left positioning as shuffle */
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .icon-container {
   position: absolute;

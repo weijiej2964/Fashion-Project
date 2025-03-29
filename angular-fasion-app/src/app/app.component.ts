@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
@@ -6,16 +6,18 @@ import { subscribeOn } from 'rxjs';
 
 import { initializeApp } from "firebase/app";
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit{
   title = 'fashion-project';
   user: User | null = null;
+
 
   constructor(private authService: AuthService) {}
 
@@ -24,7 +26,6 @@ export class AppComponent implements OnInit{
       this.user = user;
     });
   }
-
   onRegister(email: string, password: string, event: Event) {
     event.preventDefault() // prevent page refresh
     console.log("Email:", email, "Length:", email.length);

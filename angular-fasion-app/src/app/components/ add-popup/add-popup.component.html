@@ -1,0 +1,24 @@
+<div *ngIf="isVisible" class="popup">
+  <div class="popup-content">
+    <span (click)="closePopup()" class="close-btn">&times;</span>
+    <h2>Enter Item Information</h2>
+    <form (ngSubmit)="submitForm()" #popupForm="ngForm">
+      <label for="itemName">Item Name:</label>
+      <input type="text" id="itemName" name="itemName" required [(ngModel)]="itemName">
+
+      <label for="category">Category:</label>
+      <select id="category" name="category" required [(ngModel)]="category">
+        <option value="">Select a category</option>
+        <option value="electronics">Electronics</option>
+        <option value="furniture">Furniture</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+      </select>
+
+      <label for="image">Image:</label>
+      <input type="file" id="image" name="image" accept="image/jpeg, image/png" (change)="onFileChange($event)">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
