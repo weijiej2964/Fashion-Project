@@ -69,7 +69,7 @@ export class ModalPopupComponent {
   categories: string[] = ['Tops', 'Bottoms', 'Outerwear', 'Accessory', 'Shoes']; // Sample categories
   tagsArray: string[] = []; // Array for managing tags
   newTag: string = '';
-
+  imageBlob: Blob | null = null;
   constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer) {}
 
   closeModal(): void {
@@ -100,15 +100,43 @@ export class ModalPopupComponent {
     this.tagsArray.splice(index, 1); // Remove the word at the specified index
   }
   
+  // onImageUpload(event: any): void {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       // Using sanitizer to bypass security check for the image URL
+  //       this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
   onImageUpload(event: any): void {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
+  
+      // Convert file to Base64 URL for preview
       reader.onload = (e: any) => {
-        // Using sanitizer to bypass security check for the image URL
+        // Use the sanitizer for the image URL (Angular-specific security measure)
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
+  
+        // Convert the file to a Blob
+        const binaryString = atob(e.target.result.split(',')[1]); // Decode Base64
+        const arrayBuffer = new ArrayBuffer(binaryString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+  
+        for (let i = 0; i < binaryString.length; i++) {
+          uint8Array[i] = binaryString.charCodeAt(i);
+        }
+  
+        this.imageBlob = new Blob([uint8Array], { type: file.type });
+        console.log('Blob created:', this.imageBlob);
       };
-      reader.readAsDataURL(file);
+  
+      reader.readAsDataURL(file); // Read the file as a Base64 string
     }
   }
+  
 }
