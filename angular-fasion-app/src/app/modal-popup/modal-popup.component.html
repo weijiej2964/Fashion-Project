@@ -20,6 +20,40 @@
         </mat-select>
       </mat-form-field>
   
+      <mat-form-field class="centered-field">
+        <mat-label>Enter Tags</mat-label>
+        <input 
+          matInput 
+          [(ngModel)]="newTag" 
+          name="tagInput" 
+          (keydown.enter)="addWord(); $event.preventDefault()" />
+      </mat-form-field>
+    
+      <!-- Display Tags
+      <div *ngFor="let tag of tagsArray; let i = index" class="tag-item">
+        <span>{{ tag }}</span>
+        <button mat-icon-button color="warn" (click)="removeWord(i)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div> -->
+
+      <div *ngFor="let tag of tagsArray; let i = index" class="word-item">
+        <span>{{ tag }}</span>
+        <!-- <button mat-icon-button color="warn" (click)="removeTag(i)">
+          <mat-icon>close</mat-icon> -->
+          <!-- <button mat-icon-button color="warn" (click)="removeTag(i); $event.stopPropagation();">
+  <mat-icon>close</mat-icon>
+</button> -->
+<button 
+mat-icon-button 
+color="warn" 
+type="button" 
+(click)="removeTag(i); $event.stopPropagation(); $event.preventDefault();">
+<mat-icon>close</mat-icon>
+</button>
+ 
+      </div>
+      
       <input type="file" (change)="onImageUpload($event)" accept=".jpg, .jpeg, .png" />
 
       <!-- Action Buttons -->

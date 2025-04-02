@@ -40,7 +40,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';  // Required for mat-select and mat-option
 import { MatOptionModule } from '@angular/material/core';  // Required for mat-option
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';  // SafeUrl for image preview
-
+import {MatIconModule} from '@angular/material/icon';
 @Component({
   selector: 'app-modal-popup',
   standalone: true,
@@ -52,7 +52,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';  // SafeUrl f
     MatInputModule, 
     FormsModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatIconModule
   ],
   templateUrl: './modal-popup.component.html',
   styleUrls: ['./modal-popup.component.css','styles.css'],
@@ -66,7 +67,8 @@ export class ModalPopupComponent {
   // imageUrl: string | ArrayBuffer | null = null; // To store image preview
   imageUrl: SafeUrl | null = null; 
   categories: string[] = ['Tops', 'Bottoms', 'Outerwear', 'Accessory', 'Shoes']; // Sample categories
-  
+  tagsArray: string[] = []; // Array for managing tags
+  newTag: string = '';
 
   constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer) {}
 
@@ -79,12 +81,25 @@ export class ModalPopupComponent {
     console.log('Item Name:', this.itemName);
     console.log('Item Description:', this.itemDescription);
     console.log('Category:', this.selectedCategory);
+    console.log('Tags:', this.tagsArray);
     console.log('Image URL:', this.imageUrl);
 
     // Close the modal after submission
     this.dialogRef.close();
   }
+  addWord(): void {
+    if (this.newTag.trim() && !this.tagsArray.includes(this.newTag)) {
+      this.tagsArray.push(this.newTag.trim());
+      this.newTag = ''; // Clear the input after adding the tag
+    }
+  }
 
+  // Function to remove a word (tag) from the array
+  removeTag(index: number): void {
+    console.log('Remove button clicked for index:', index);
+    this.tagsArray.splice(index, 1); // Remove the word at the specified index
+  }
+  
   onImageUpload(event: any): void {
     const file = event.target.files[0];
     if (file) {
