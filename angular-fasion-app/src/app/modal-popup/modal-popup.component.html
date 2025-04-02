@@ -36,25 +36,55 @@
           <mat-icon>close</mat-icon>
         </button>
       </div> -->
-
+      <div class="tags-container">
       <div *ngFor="let tag of tagsArray; let i = index" class="word-item">
         <span>{{ tag }}</span>
-        <!-- <button mat-icon-button color="warn" (click)="removeTag(i)">
-          <mat-icon>close</mat-icon> -->
-          <!-- <button mat-icon-button color="warn" (click)="removeTag(i); $event.stopPropagation();">
-  <mat-icon>close</mat-icon>
-</button> -->
-<button 
-mat-icon-button 
-color="warn" 
-type="button" 
-(click)="removeTag(i); $event.stopPropagation(); $event.preventDefault();">
-<mat-icon>close</mat-icon>
-</button>
- 
+        <button 
+          mat-icon-button  color="warn" type="button" (click)="removeTag(i); $event.stopPropagation(); $event.preventDefault();">
+          <mat-icon>close</mat-icon>
+        </button>
+        </div>
       </div>
       
-      <input type="file" (change)="onImageUpload($event)" accept=".jpg, .jpeg, .png" />
+      <!-- <input type="file" (change)="onImageUpload($event)" accept=".jpg, .jpeg, .png" /> -->
+      <!-- <input type="file" class="file-input" (change)="onImageUpload($event)" accept=".jpg, .jpeg, .png" /> -->
+      <!-- <div class="file-input-wrapper">
+        <button type="button" class="custom-file-button">Choose File</button>
+        <input 
+          type="file" 
+          class="file-input" 
+          (change)="onImageUpload($event)" 
+          accept=".jpg, .jpeg, .png" 
+        />
+      </div> -->
+      <!-- <div class="file-input-wrapper">
+        <button type="button" class="custom-file-button">Choose File</button>
+        <input 
+          type="file" 
+           
+          (change)="onImageUpload($event)" 
+          accept=".jpg, .jpeg, .png" 
+        />
+      </div> -->
+      <!-- <button type="button" class="custom-file-button">Choose File</button> -->
+
+        <!-- <input type="file"         
+          (change)="onImageUpload($event)" 
+          accept=".jpg, .jpeg, .png" 
+          class = "custom-file-button"
+        /> -->
+        <div class="file-input-wrapper">
+          <button type="button" class="custom-file-button" (click)="fileInput.click()">Upload Image</button>
+          <input 
+            #fileInput 
+            type="file" 
+            (change)="onImageUpload($event)" 
+            accept=".jpg, .jpeg, .png" 
+            style="display: none;" 
+          />
+        </div>
+        
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Preview">
 
       <!-- Action Buttons -->
       <div class="actions">
