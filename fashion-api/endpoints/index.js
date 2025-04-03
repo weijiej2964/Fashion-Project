@@ -61,13 +61,10 @@ app.post('/:user_id/inventory/upload', async (req, res) => { // does this have t
         // }
 
         const data = {
-            uid: req.params.user_id,
-            item_id: item_id, // PLACEHOLDER for testing purposes
             item_name: req.body.item_name,
             item_desc: req.body.item_desc,
             image_url: req.body.image_url,
             image_blob: req.body.image_blob,
-            category: req.body.category,
             tags: req.body.tags
         };
 

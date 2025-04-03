@@ -41,6 +41,8 @@ import { MatSelectModule } from '@angular/material/select';  // Required for mat
 import { MatOptionModule } from '@angular/material/core';  // Required for mat-option
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';  // SafeUrl for image preview
 import {MatIconModule} from '@angular/material/icon';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ApiService } from '../api.service';
 @Component({
   selector: 'app-modal-popup',
   standalone: true,
@@ -53,7 +55,9 @@ import {MatIconModule} from '@angular/material/icon';
     FormsModule,
     MatSelectModule,
     MatOptionModule,
-    MatIconModule
+    MatIconModule,
+    ApiService,
+    HttpClient
   ],
   templateUrl: './modal-popup.component.html',
   styleUrls: ['./modal-popup.component.css','styles.css'],
@@ -66,10 +70,14 @@ export class ModalPopupComponent {
   selectedCategory: string = '';
   // imageUrl: string | ArrayBuffer | null = null; // To store image preview
   imageUrl: SafeUrl | null = null; 
-  categories: string[] = ['Tops', 'Bottoms', 'Outerwear', 'Accessory', 'Shoes']; // Sample categories
+  categories: string[] = ['Top', 'Bottom', 'Outerwear', 'Accessory', 'Shoes']; // Sample categories
   tagsArray: string[] = []; // Array for managing tags
   newTag: string = '';
   imageBlob: Blob | null = null;
+  authService: any;
+  user: any;
+  apiService: any;
+  inventoryByCategory: any;
   constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer) {}
 
   closeModal(): void {
@@ -78,15 +86,36 @@ export class ModalPopupComponent {
 
   submitForm(): void {
     // Handle form submission
-    console.log('Item Name:', this.itemName);
+    console.log('Item Name:', this.itemName); 
     console.log('Item Description:', this.itemDescription);
     console.log('Category:', this.selectedCategory);
     console.log('Tags:', this.tagsArray);
     console.log('Image URL:', this.imageUrl);
+    this.authService.getUser().subscribe(user => {
+          this.user = user;
 
-    // Close the modal after submission
-    this.dialogRef.close();
+          console.log(this.user);
+
+          this.apiService.index(this.user?.uid).subscribe(data => {
+            this.inventoryByCategory = this.transformInventoryData(data);
+            console.log('transformed inventory:', this.inventoryByCategory);
+            this.filterInventory();
+            console.log('filtered inventory:', this.filteredInventory);
+          })
+        // Close the modal after submission
+        this.dialogRef.close();
   }
+}
+  transformInventoryData(data: any): any {
+    throw new Error('Method not implemented.');
+  }
+  filterInventory() {
+    throw new Error('Method not implemented.');
+  }
+  filteredInventory(arg0: string, filteredInventory: any) {
+    throw new Error('Method not implemented.');
+  }
+  
   addWord(): void {
     if (this.newTag.trim() && !this.tagsArray.includes(this.newTag)) {
       this.tagsArray.push(this.newTag.trim());
