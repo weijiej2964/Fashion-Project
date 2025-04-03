@@ -301,7 +301,7 @@ right: 35px;
   position: absolute;
   width: 100px;
   height: 100px;
-  top: 70%; /* Adjust this value to move it higher */
+  top: 65%; /* Adjust this value to move it higher */
   left: 30%; /* Same left positioning as shuffle */
   background-color: white;
   border-radius: 12px;
