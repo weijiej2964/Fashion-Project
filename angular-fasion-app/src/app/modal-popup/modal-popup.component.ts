@@ -56,8 +56,8 @@ import { ApiService } from '../api.service';
     MatSelectModule,
     MatOptionModule,
     MatIconModule,
-    ApiService,
-    HttpClient
+    // HttpClient,
+    HttpClientModule,
   ],
   templateUrl: './modal-popup.component.html',
   styleUrls: ['./modal-popup.component.css','styles.css'],
@@ -76,9 +76,9 @@ export class ModalPopupComponent {
   imageBlob: Blob | null = null;
   authService: any;
   user: any;
-  apiService: any;
+ 
   inventoryByCategory: any;
-  constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer) {}
+  constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer, private apiService: ApiService) {}
 
   closeModal(): void {
     this.dialogRef.close();
@@ -90,32 +90,22 @@ export class ModalPopupComponent {
     console.log('Item Description:', this.itemDescription);
     console.log('Category:', this.selectedCategory);
     console.log('Tags:', this.tagsArray);
-    console.log('Image URL:', this.imageUrl);
-    this.authService.getUser().subscribe(user => {
-          this.user = user;
+    console.log('Image Blob:', this.imageBlob);
 
-          console.log(this.user);
-
-          this.apiService.index(this.user?.uid).subscribe(data => {
-            this.inventoryByCategory = this.transformInventoryData(data);
-            console.log('transformed inventory:', this.inventoryByCategory);
-            this.filterInventory();
-            console.log('filtered inventory:', this.filteredInventory);
-          })
-        // Close the modal after submission
+    let jsonFile = {
+      "item_name": this.itemName,
+      "item_desc": this.itemDescription,
+      "category": this.selectedCategory,
+      "tags": this.tagsArray,
+      "image_blob": this.imageBlob
+      }
+    
+    //need to send this json to db.
+   
+    // Close the modal after submission
         this.dialogRef.close();
   }
-}
-  transformInventoryData(data: any): any {
-    throw new Error('Method not implemented.');
-  }
-  filterInventory() {
-    throw new Error('Method not implemented.');
-  }
-  filteredInventory(arg0: string, filteredInventory: any) {
-    throw new Error('Method not implemented.');
-  }
-  
+
   addWord(): void {
     if (this.newTag.trim() && !this.tagsArray.includes(this.newTag)) {
       this.tagsArray.push(this.newTag.trim());
