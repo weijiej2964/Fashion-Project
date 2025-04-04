@@ -17,16 +17,36 @@
     </div>
 
     <div class="button-container" style="display: flex; justify-content: flex-end;">
-      <!-- add justify-items: flex-end; if u like idk -->
-      <button class="button">Top</button>
-      <button class="button">Bottom</button>
-      <button class="button">Outerwear</button>
-      <button class="button">Accessory</button>
-      <button class="button">Shoes</button>
+      <button class="button" (click)="selectCategory('top')">Top</button>
+      <button class="button" (click)="selectCategory('bottom')">Bottom</button>
+      <button class="button" (click)="selectCategory('outerwear')">Outerwear</button>
+      <button class="button" (click)="selectCategory('accessory')">Accessory</button>
+      <button class="button" (click)="selectCategory('shoes')">Shoes</button>
     </div>
 
-    <div class="inside-container"> </div>
+    <div class="inside-container">
+      <!-- app.component.html -->
+      <div *ngIf="filteredInventory">
+
+        <div class="items-grid">
+          <div *ngFor="let item of filteredInventory" class="item-card">
+            <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
+            <h3>{{ item.item_name }}</h3>
+            <p>{{ item.item_desc }}</p>
+            <div class="tags">
+              <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!filteredInventory">
+        <p>No {{selectedCategory}} available at the moment.</p>
+      </div>
+    </div>
     <!-- This is where clothes will be, on input from button and tag, show clothes-->
+
+
   </div>
 
 
@@ -37,17 +57,19 @@
   <!-- Auth Container (holds both Sign Up and Login) -->
   <div class="auth-container">
     <h1>Welcome to StyleMe!</h1>
-    <!-- Sign Up Card -->
-    <div class="auth-card">
+    <!-- Sign Up Form -->
+    <div *ngIf="isSignUp" class="auth-card">
       <h2>Sign Up</h2>
+      <!-- Toggle between Sign Up and Login -->
+      <div class="toggle-buttons">
+        <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
+        <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
+      </div>
       <form (ngSubmit)="onRegister(registerEmail.value, registerPassword.value, $event)">
         <input #registerEmail type="email" placeholder="Email" required />
         <input #registerPassword type="password" placeholder="Password" required />
-        <button type="submit" (click)="onRegister(registerEmail.value, registerPassword.value, $event)">
-          Sign Up
-        </button>
+        <button type="submit" (click)="onRegister(registerEmail.value, registerPassword.value, $event)">Sign Up</button>
       </form>
-
       <!-- OR Separator -->
       <div class="or-section">
         <span>OR</span>
@@ -62,24 +84,22 @@
       </div>
     </div>
 
-    <!-- Login Card -->
-    <div class="auth-card">
+    <!-- Login Form -->
+    <div *ngIf="!isSignUp" class="auth-card">
       <h2>Login</h2>
+      <!-- Toggle between Sign Up and Login -->
+      <div class="toggle-buttons">
+        <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
+        <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
+      </div>
       <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
-
-        <!-- "Remember Me" checkbox -->
-        <label class="remember-me">
-          <input type="checkbox" />
-          Remember Me
+        <label>
+          <input type="checkbox" /> Remember Me
         </label>
-
-        <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">
-          Login
-        </button>
+        <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
       </form>
-
       <!-- OR Separator -->
       <div class="or-section">
         <span>OR</span>
@@ -93,5 +113,8 @@
         </button>
       </div>
     </div>
+
+
   </div>
+
 </ng-template>

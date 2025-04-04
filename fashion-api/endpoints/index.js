@@ -54,12 +54,10 @@ app.post('/:user_id/inventory/upload', (req, res) => { // does this have to be a
         }
 
         const data = {
-            // uid: req.params.user_id,
             item_name: req.body.item_name,
             item_desc: req.body.item_desc,
             image_url: req.body.image_url,
             image_blob: req.body.image_blob,
-            // category: category,
             tags: req.body.tags
         };
 
