@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   isSignUp: boolean = false; // Or true, depending on your initial state
 
 
-  selectedCategory: string = 'top'; //default category
+  selectedCategory: string = 'tops'; //default category
   inventoryByCategory: { [key: string]: any[] } = {};
   filteredInventory: InventoryItem[] = [];
   isLoading = true;

@@ -7,12 +7,23 @@ let { connectFirebase } = require('../config/connect_firebase.js')
 const express = require('express')
 const app = express()
 const router = express.Router();
+const cors = require('cors');
+
 const get_category = require('./get_category')
 const get_clothing = require('./get_clothing')
+const get_inventory = require('./get_inventory')
+
 
 app.use(express.json()) // sends json data to PostMan
-// app.use('/:user_id/inventory/:category', get_category)
+app.use(get_category)
 app.use(get_clothing)
+app.use(get_inventory)
+
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    credentials: true // Allow cookies and authentication
+}))
 
 // Initialize Firebase
 connectFirebase()
@@ -34,6 +45,12 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    credentials: true // Allow cookies and authentication
+}))
+
 // no string patterns cause apparently they don't work on express 5 LOL
 // Uploads clothing image and any data associated with it, stores it into the database
 
@@ -41,7 +58,7 @@ app.listen(port, () => {
 // TO DO: MORE ERROR HANDLING... make sure category is actually a category
 app.post('/:user_id/inventory/upload', (req, res) => { // does this have to be async? idk lets find out 
     // im not even too sure if this works like this when we do authentication but we move
-    const Category = new Set(['tops', 'bottoms', 'shoes', 'hats', 'glasses', 'earrings', 'necklaces', 'bracelets', 'watches', 'rings'])
+    const Category = new Set(['tops', 'bottoms', 'shoes', 'hats', 'glasses', 'earrings', 'necklaces', 'bracelets', 'watches', 'rings', 'accessories'])
 
 
     console.log(`POST request to upload clothes`)

@@ -4,7 +4,7 @@ let { connectFirebase } = require('../config/connect_firebase.js')
 
 const get_category = express.Router();
 
-app.use(express.json()) // sends json data to PostMan
+get_category.use(express.json()) // sends json data to PostMan
 
 // Initialize Firebase
 connectFirebase()
@@ -30,4 +30,4 @@ get_category.get('/:user_id/inventory/:category', async (req, res) => {
     }
 });
 
-module.exports = get_clothing
+module.exports = get_category
