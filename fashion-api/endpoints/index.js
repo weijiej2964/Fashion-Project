@@ -1,28 +1,22 @@
 // this is the main file for the api 
 // TO DO: connect with firebase auth to get token to only allow authorized users to make calls
 
-const { initializeApp } = require('firebase/app')
 let { getDatabase, ref, set, push } = require('firebase/database')
+let { connectFirebase } = require('../config/connect_firebase.js')
 
 const express = require('express')
 const app = express()
-const firebase = require('firebase/app')
+const router = express.Router();
+const get_category = require('./get_category')
+const get_clothing = require('./get_clothing')
 
 app.use(express.json()) // sends json data to PostMan
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAq7_H5i_ojYQAVYVNAG8usMun5YRX0vUY",
-    authDomain: "fashion-project-e2aba.firebaseapp.com",
-    databaseURL: "https://fashion-project-e2aba-default-rtdb.firebaseio.com",
-    projectId: "fashion-project-e2aba",
-    storageBucket: "fashion-project-e2aba.firebasestorage.app",
-    messagingSenderId: "156468025393",
-    appId: "1:156468025393:web:72f80e880c47dca37f5d10"
-};
+// app.use('/:user_id/inventory/:category', get_category)
+app.use(get_clothing)
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+connectFirebase()
+
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase();
 

@@ -1,4 +1,4 @@
-const { initializeApp } = require('firebase/app')
+let { connectFirebase } = require('../config/connect_firebase.js')
 let { getDatabase, ref, set } = require('firebase/database')
 
 const express = require('express')
@@ -7,19 +7,8 @@ const firebase = require('firebase/app')
 
 app.use(express.json()) // sends json data to PostMan
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAq7_H5i_ojYQAVYVNAG8usMun5YRX0vUY",
-    authDomain: "fashion-project-e2aba.firebaseapp.com",
-    databaseURL: "https://fashion-project-e2aba-default-rtdb.firebaseio.com",
-    projectId: "fashion-project-e2aba",
-    storageBucket: "fashion-project-e2aba.firebasestorage.app",
-    messagingSenderId: "156468025393",
-    appId: "1:156468025393:web:72f80e880c47dca37f5d10"
-};
-
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+connectFirebase()
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase();
 
