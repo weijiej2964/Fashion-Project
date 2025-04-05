@@ -1,18 +1,66 @@
-/* Example styles - adjust as needed */
-.mat-dialog-actions {
-    justify-content: flex-end;
-    margin-bottom: 0;
+/* delete-popup.component.css */
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100%;
+    background-color: blue;
   }
   
-  button {
-    margin-left: 8px;
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 16px;
   }
   
-  button:first-child {
-    background-color: #e0f2f1;
-    color: #388e3c;
+  .centered-title {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    text-align: center;
   }
   
-  button:last-child {
-    color: #d32f2f;
+  .centered-content {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  p {
+    text-align: center;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed: space-around, flex-end */
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .actions button {
+    border-radius: 4px; /* Optional: add some rounding to buttons */
+    padding: 8px 16px;
+  }
+  
+  /* If you want the "Yes" button to have a distinct style */
+  .actions button[color="warn"] {
+    background-color: #f44336; /* Example red color */
+    color: white;
+  }
+  
+  .actions button[color="warn"]:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* You can also style the "No" button differently if needed */
+  .actions button:not([color="warn"]) {
+    /* Add styles for the "No" button */
+    border: 1px solid #ccc;
   }

@@ -142,7 +142,7 @@ export class AppComponent implements OnInit {
   openDialog(item: InventoryItem): void {
     const dialogRef = this.dialog.open(DeletePopupComponent, {
       width: '300px',
-      data: { message: `Are you sure you want to delete "${item.item_name}"?` },
+      data: { message: `Are you sure you want to delete ${item.item_name}?` },
       panelClass: 'confirm-deletion-dialog'
     });
 

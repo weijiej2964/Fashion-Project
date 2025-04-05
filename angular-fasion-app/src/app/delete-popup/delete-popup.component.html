@@ -1,8 +1,12 @@
-<h2 mat-dialog-title>Confirm deletion?</h2>
-<div mat-dialog-content>
-  <p>{{ data.message }}</p>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No</button>
-  <button mat-button color="warn" (click)="onYesClick()">Yes</button>
+<div class="modal-content">
+  <div class="form-container">
+    <h2 mat-dialog-title class="centered-title">Confirm Deletion?</h2>
+    <div mat-dialog-content class="centered-content">
+      <p>{{ data.message }}</p>
+    </div>
+    <div mat-dialog-actions class="actions">
+      <button mat-button (click)="onNoClick()">No</button>
+      <button mat-button color="warn" (click)="onYesClick()">Yes</button>
+    </div>
+  </div>
 </div>
