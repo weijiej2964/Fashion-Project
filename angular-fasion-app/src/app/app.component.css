@@ -321,3 +321,19 @@ font-size: 24px;
   border-radius: 4px;
   font-size: 0.8em;
 }
+
+.card-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  padding: 0; /* Remove default button padding to fit the icon snugly */
+}
+
+.button-icon {
+  width: 30px;
+  height: 30px; 
+}

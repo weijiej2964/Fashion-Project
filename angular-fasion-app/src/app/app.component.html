@@ -53,6 +53,9 @@
         <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
           <div class="items-grid">
             <mat-card *ngFor="let item of filteredInventory" class="item-card">
+              <button class="card-button" (click)="openDialog(item)">
+                <img src="../assets/trash-icon.png" alt="Delete Item" class="button-icon">
+              </button>
               <mat-card-header>
                 <mat-card-title>{{ item.item_name }}</mat-card-title>
               </mat-card-header>

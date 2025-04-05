@@ -10,12 +10,14 @@ import { InventoryItem, InventoryByCategory } from './inventory.interface';
 import { initializeApp } from "firebase/app";
 import { switchMap } from 'rxjs/operators';
 import { MatCardModule } from '@angular/material/card';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, MatCardModule, HttpClientModule],
+  imports: [CommonModule, MatCardModule, MatDialogModule, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -31,7 +33,7 @@ export class AppComponent implements OnInit {
   isLoading = true;
 
 
-  constructor(private authService: AuthService, private apiService: ApiService) { };
+  constructor(private authService: AuthService, private apiService: ApiService, public dialog: MatDialog) { };
 
   ngOnInit() {
   }
@@ -136,6 +138,31 @@ export class AppComponent implements OnInit {
   filterInventory() {
     this.filteredInventory = this.inventoryByCategory[this.selectedCategory];
   }
+
+  openDialog(item: InventoryItem): void {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '300px', // Adjust as needed
+      data: { message: `Are you sure you want to delete "${item.item_name}"?` },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Confirmed: Delete item', item);
+        this.deleteItem(item); // Call the deleteItem method
+      } else {
+        console.log('Deletion cancelled');
+      }
+    });
+  }
+  deleteItem(itemToDelete: InventoryItem): void {
+    if (this.selectedCategory && this.inventoryByCategory[this.selectedCategory]) {
+      this.inventoryByCategory[this.selectedCategory] = this.inventoryByCategory[this.selectedCategory].filter(item => item.id !== itemToDelete.id);
+      this.filterInventory(); // Update the filtered list
+      console.log(`Item "${itemToDelete.item_name}" deleted from category "${this.selectedCategory}"`);
+      // sending it back to db endpoint
+    }
+  }
+  
 }
 
 

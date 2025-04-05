@@ -1,0 +1,18 @@
+/* Example styles - adjust as needed */
+.mat-dialog-actions {
+    justify-content: flex-end;
+    margin-bottom: 0;
+  }
+  
+  button {
+    margin-left: 8px;
+  }
+  
+  button:first-child {
+    background-color: #e0f2f1;
+    color: #388e3c;
+  }
+  
+  button:last-child {
+    color: #d32f2f;
+  }
