@@ -5,8 +5,8 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
-    height: 100%;
-    background-color: blue;
+    height: 50%;
+    background-color: #e3cacf;
   }
   
   .form-container {
@@ -45,22 +45,31 @@
   }
   
   .actions button {
-    border-radius: 4px; /* Optional: add some rounding to buttons */
+    border-radius: 8px; /* Optional: add some rounding to buttons */
     padding: 8px 16px;
   }
   
   /* If you want the "Yes" button to have a distinct style */
   .actions button[color="warn"] {
-    background-color: #f44336; /* Example red color */
-    color: white;
+    background-color: #9EBD9E; /* Example red color */
+    border: 1px solid #344E41;
+    color: #344E41;
   }
   
   .actions button[color="warn"]:hover {
-    background-color: #d32f2f;
+    background-color: #344E41;
+    color: #ffff;
   }
   
   /* You can also style the "No" button differently if needed */
   .actions button:not([color="warn"]) {
     /* Add styles for the "No" button */
-    border: 1px solid #ccc;
+    background-color: #F7A1A5;
+    border: 1px solid #B80000;
+    color: #B80000;
+  }
+
+  .actions button:not([color="warn"]):hover {
+    background-color: #B80000;
+    color: #ffff;
   }
