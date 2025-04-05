@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
   inventoryByCategory: { [key: string]: any[] } = {};
   filteredInventory: InventoryItem[] = [];
   isLoading = true;
+  isDropdownOpen: boolean = false;
 
 
   constructor(private authService: AuthService, private apiService: ApiService, public dialog: MatDialog) { };
@@ -44,6 +45,10 @@ export class AppComponent implements OnInit {
 
   switchToSignup() {
     this.isSignUp = true;
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   onRegister(email: string, password: string, event: Event) {
