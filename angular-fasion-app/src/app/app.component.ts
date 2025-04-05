@@ -9,14 +9,15 @@ import { ApiService } from './api.service';
 import { InventoryItem, InventoryByCategory } from './inventory.interface';
 import { initializeApp } from "firebase/app";
 import { switchMap } from 'rxjs/operators';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, MatCardModule, HttpClientModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'fashion-project';
