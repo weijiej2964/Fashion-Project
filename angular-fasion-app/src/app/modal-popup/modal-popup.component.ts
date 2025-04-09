@@ -75,11 +75,11 @@ export class ModalPopupComponent {
   tagsArray: string[] = []; // Array for managing tags
   newTag: string = '';
   imageBlob: Blob | null = null;
-  authService: any;
+  // authService: any;
   user: any;
  
   inventoryByCategory: any;
-  constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer, private apiService: ApiService) {}
+  constructor(public dialogRef: MatDialogRef<ModalPopupComponent>, private sanitizer: DomSanitizer, private apiService: ApiService, private authService: AuthService) {}
 
   closeModal(): void {
     this.dialogRef.close();
@@ -105,10 +105,16 @@ export class ModalPopupComponent {
       "item_id": Math.floor(Math.random() * 1000000)+1, //generates random # between 1 and 1,000,000(inclusive)
       "image_blob": this.imageBlob
       }
-    
+      this.apiService.addInventory(this.user.uid, jsonFile).subscribe({
+        next: (response) => {
+          console.log('Sent to DB successfully!', response);
+        },
+        error: (error) => {
+          console.error('Error sending to DB:', error);
+        }
+      });
     //need to send this json to db.
-      this.apiService.addInventory(this.user.uid,jsonFile);
-      console.log("sent to db!");
+     
     // Close the modal after submission
         this.dialogRef.close();
     });
