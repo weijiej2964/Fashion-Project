@@ -14,4 +14,8 @@ export class ApiService {
         return this.http.get(
             `${this.apiUrl}/${userId}/inventory`)
     }
+
+    addInventory(userId: string, addition: object){
+        return this.http.post(`${this.apiUrl}/${userId}/inventory`,addition)
+    }
 }

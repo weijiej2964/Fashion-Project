@@ -43,6 +43,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';  // SafeUrl f
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ApiService } from '../api.service';
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-modal-popup',
   standalone: true,
@@ -86,13 +87,17 @@ export class ModalPopupComponent {
 
   submitForm(): void {
     // Handle form submission
+
+    this.authService.getUser().subscribe((user: any) => {
+      this.user = user; 
+
     console.log('Item Name:', this.itemName); 
     console.log('Item Description:', this.itemDescription);
     console.log('Category:', this.selectedCategory);
     console.log('Tags:', this.tagsArray);
     console.log('Image Blob:', this.imageBlob);
 
-    let jsonFile = {
+    const jsonFile = {
       "item_name": this.itemName,
       "item_desc": this.itemDescription,
       "category": this.selectedCategory,
@@ -102,9 +107,11 @@ export class ModalPopupComponent {
       }
     
     //need to send this json to db.
-   
+      this.apiService.addInventory(this.user.uid,jsonFile);
+      console.log("sent to db!");
     // Close the modal after submission
         this.dialogRef.close();
+    });
   }
 
   addWord(): void {
