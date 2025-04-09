@@ -7,8 +7,15 @@ let { getDatabase, ref, set } = require('firebase/database')
 const express = require('express')
 const app = express()
 const firebase = require('firebase/app')
+const cors = require('cors');
+
 
 app.use(express.json()) // sends json data to PostMan
+app.use(cors({
+    origin: 'http://localhost:4200',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    credentials: true // Allow cookies and authentication
+}))
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
