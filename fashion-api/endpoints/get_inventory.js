@@ -1,44 +1,25 @@
-const { initializeApp } = require('firebase/app')
 let { getDatabase, ref, get, set } = require('firebase/database')
 const express = require('express')
-const cors = require('cors');
+let { connectFirebase } = require('../config/connect_firebase.js')
+// const cors = require('cors');
 
-const app = express()
+const get_inventory = express.Router();
 
-app.use(cors({
-    origin: 'http://localhost:4200',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
-    credentials: true // Allow cookies and authentication
-}))
+get_inventory.use(express.json()) // sends json data to PostMan
 
-app.use(express.json()) // sends json data to PostMan
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAq7_H5i_ojYQAVYVNAG8usMun5YRX0vUY",
-    authDomain: "fashion-project-e2aba.firebaseapp.com",
-    databaseURL: "https://fashion-project-e2aba-default-rtdb.firebaseio.com",
-    projectId: "fashion-project-e2aba",
-    storageBucket: "fashion-project-e2aba.firebasestorage.app",
-    messagingSenderId: "156468025393",
-    appId: "1:156468025393:web:72f80e880c47dca37f5d10"
-};
+// get_inventory.use(cors({
+//     origin: 'http://localhost:4200',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+//     credentials: true // Allow cookies and authentication
+// }))
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig); //admin
+connectFirebase()
 // Initialize Realtime Database and get a reference to the service
-const database = getDatabase(firebaseApp); //db
-
-
-const port = 3000
-const server = process.env.PORT || 8080 // idk if this matters i see it everywhere tho
-
-app.get('/', (req, res) => {
-    res.send('This is our Fashion API!')
-})
+const database = getDatabase(); //db
 
 // Returns JSON (?) of all clothing items for a user
-app.get('/:user_id/inventory', async (req, res) => {
+get_inventory.get('/:user_id/inventory', async (req, res) => {
     try {
         const userId = req.params.user_id;
         const inventoryRef = ref(database, `${userId}/clothing/`);
@@ -55,6 +36,4 @@ app.get('/:user_id/inventory', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+module.exports = get_inventory
