@@ -11,14 +11,6 @@ connectFirebase()
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase(); //db
 
-
-// const port = 3000
-// const server = process.env.PORT || 8080 // idk if this matters i see it everywhere tho
-
-// app.get('/', (req, res) => {
-//     res.send('This is our Fashion API!')
-// })
-
 // Returns JSON (?) of all clothing items for a user
 get_clothing.get('/:user_id/inventory/:category/:item_id', async (req, res) => {
     try {
