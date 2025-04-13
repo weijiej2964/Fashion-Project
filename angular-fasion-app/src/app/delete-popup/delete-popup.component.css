@@ -1,0 +1,75 @@
+/* delete-popup.component.css */
+
+.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 50%;
+    background-color: #e3cacf;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 16px;
+  }
+  
+  .centered-title {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+  
+  .centered-content {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  p {
+    text-align: center;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed: space-around, flex-end */
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .actions button {
+    border-radius: 8px; /* Optional: add some rounding to buttons */
+    padding: 8px 16px;
+  }
+  
+  /* If you want the "Yes" button to have a distinct style */
+  .actions button[color="warn"] {
+    background-color: #9EBD9E; /* Example red color */
+    border: 1px solid #344E41;
+    color: #344E41;
+  }
+  
+  .actions button[color="warn"]:hover {
+    background-color: #344E41;
+    color: #ffff;
+  }
+  
+  /* You can also style the "No" button differently if needed */
+  .actions button:not([color="warn"]) {
+    /* Add styles for the "No" button */
+    background-color: #F7A1A5;
+    border: 1px solid #B80000;
+    color: #B80000;
+  }
+
+  .actions button:not([color="warn"]):hover {
+    background-color: #B80000;
+    color: #ffff;
+  }
