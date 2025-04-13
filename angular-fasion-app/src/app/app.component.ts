@@ -162,12 +162,31 @@ export class AppComponent implements OnInit {
   }
   deleteItem(itemToDelete: InventoryItem): void {
     if (this.selectedCategory && this.inventoryByCategory[this.selectedCategory]) {
-      this.inventoryByCategory[this.selectedCategory] = this.inventoryByCategory[this.selectedCategory].filter(item => item.id !== itemToDelete.id);
-      this.filterInventory(); // Update the filtered list
+      // delete from frontend
+      this.inventoryByCategory[this.selectedCategory] = this.inventoryByCategory[this.selectedCategory].filter(
+        item => item.id !== itemToDelete.id
+      );
+      this.filterInventory(); // get the current inventory after deletion
+  
       console.log(`Item "${itemToDelete.item_name}" deleted from category "${this.selectedCategory}"`);
-      // sending it back to db endpoint
+  
+      // deletes in the db
+      if (this.user?.uid) {
+        this.apiService.deleteInventory(this.user.uid, this.selectedCategory, itemToDelete.id).subscribe({
+          next: (res) => {
+            console.log(`Item "${itemToDelete.item_name}" successfully deleted from DB.`);
+          },
+          error: (err) => {
+            console.error(`Failed to delete item from DB:`, err);
+          }
+        });
+      } else {
+        console.error("User ID not found — cannot delete item from DB.");
+      }
     }
   }
+  
+  
   
 }
 
