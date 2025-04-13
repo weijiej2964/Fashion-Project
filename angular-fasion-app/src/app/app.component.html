@@ -125,8 +125,8 @@
       <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
-        <label>
-          <input type="checkbox" /> Remember Me
+        <label style = "font-family: Gowun Dodum, serif;">
+          <input type="checkbox"/> Remember Me
         </label>
         <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
       </form>
