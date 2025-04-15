@@ -8,12 +8,16 @@
   </div>
 
   <div class="basic-container">
-    <div class="search-container">
-      <!-- Search Bar -->
-      <div class="flex justify-center">
-        <input type="text" placeholder="Search..."
-          class="w-1/2 p-2 rounded-full border border-gray-300 focus:outline-none" />
-      </div>
+    <!-- Search feature bar -->
+    <div class="search-bar-container">
+      <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
+      <!-- Use: when typing (input)="selectTag(selectedTag)" -->
+      <button class="search-button" (click)="addTag(selectedTag)">Add</button>
+      <button class="clear-button" (click)="clearTags()">Clear</button>
+    </div>
+
+    <div class ="tag-container">
+      <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
     </div>
 
     <div class="button-container" style="display: flex; justify-content: flex-end;">
@@ -27,7 +31,6 @@
      <!-- <div class="inside-container">
        app.component.html 
       <div *ngIf="filteredInventory">
-
         <div class="items-grid">
           <div *ngFor="let item of filteredInventory" class="item-card">
             <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
@@ -43,6 +46,21 @@
       <div *ngIf="!filteredInventory">
         <p>No {{selectedCategory}} available at the moment.</p>
       </div>
+      
+    <!-- show results from tags -->
+    <div *ngIf="searchResults.length > 0" class="search-results">
+      <h2>Search Results:</h2>
+      <div class="items-grid">
+        <div *ngFor="let item of searchResults" class="item-card">
+          <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
+          <h3>{{ item.item_name }}</h3>
+          <p>{{ item.item_desc }}</p>
+          <div class="tags">
+            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
     </div>
       This is where clothes will be, on input from button and tag, show clothes-->
 
@@ -76,7 +94,7 @@
       </div>
       
 
-
+    </div>
   </div>
 
 
