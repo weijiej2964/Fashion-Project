@@ -21,15 +21,15 @@
     </div>
 
     <div class="button-container" style="display: flex; justify-content: flex-end;">
-      <button class="button" (click)="selectCategory('top')">Top</button>
-      <button class="button" (click)="selectCategory('bottom')">Bottom</button>
+      <button class="button" (click)="selectCategory('top')">Tops</button>
+      <button class="button" (click)="selectCategory('bottom')">Bottoms</button>
       <button class="button" (click)="selectCategory('outerwear')">Outerwear</button>
-      <button class="button" (click)="selectCategory('accessory')">Accessory</button>
+      <button class="button" (click)="selectCategory('accessory')">Accessories</button>
       <button class="button" (click)="selectCategory('shoes')">Shoes</button>
     </div>
 
-    <div class="inside-container">
-      <!-- app.component.html -->
+     <!-- <div class="inside-container">
+       app.component.html 
       <div *ngIf="filteredInventory">
         <div class="items-grid">
           <div *ngFor="let item of filteredInventory" class="item-card">
@@ -62,13 +62,43 @@
       </div>
 
     </div>
-    <!-- This is where clothes will be, on input from button and tag, show clothes-->
+      This is where clothes will be, on input from button and tag, show clothes-->
+
+      <div class="inside-container">
+        <!-- app.component.html -->
+        <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
+          <div class="items-grid">
+            <mat-card *ngFor="let item of filteredInventory" class="item-card">
+              <button class="card-button" (click)="openDialog(item)">
+                <img src="../assets/trash-can.png" alt="Delete Item" class="button-icon">
+              </button>
+              <mat-card-header>
+                <mat-card-title>{{ item.item_name }}</mat-card-title>
+              </mat-card-header>
+              
+              <img mat-card-image [src]="item.image_url" alt="{{ item.item_name }}">
+      
+              <mat-card-content>
+                <p>{{ item.item_desc }}</p>
+                <div class="tags">
+                  <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      
+        <ng-template #noItems>
+          <p style = "text-align: center; margin-top: 40px;">No {{selectedCategory}} available at the moment.</p>
+        </ng-template>
+      </div>
+      
 
     </div>
   </div>
 
 
-</div>
+</div> 
 
 
 <ng-template #loggedOut>

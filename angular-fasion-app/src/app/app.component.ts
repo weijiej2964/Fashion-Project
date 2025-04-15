@@ -9,16 +9,21 @@ import { ApiService } from './api.service';
 import { InventoryItem, InventoryByCategory } from './inventory.interface';
 import { initializeApp } from "firebase/app";
 import { switchMap } from 'rxjs/operators';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
+
+import { MatCardModule } from '@angular/material/card';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { DeletePopupComponent } from './delete-popup/delete-popup.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, CommonModule, FormsModule],
+  imports: [CommonModule, MatCardModule, MatDialogModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   title = 'fashion-project';
@@ -28,6 +33,8 @@ export class AppComponent implements OnInit {
   selectedCategory: string = 'top'; //default category
   inventoryByCategory: { [key: string]: any[] } = {};
   filteredInventory: InventoryItem[] = [];
+  isLoading = true;
+  isDropdownOpen: boolean = false;
 
   searchResults: InventoryItem[] = [];
   selectedTag: string = ''; //default selected tag
@@ -36,7 +43,7 @@ export class AppComponent implements OnInit {
   isLoading = true;
   
 
-  constructor(private authService: AuthService, private apiService: ApiService) { };
+  constructor(private authService: AuthService, private apiService: ApiService, public dialog: MatDialog) { };
 
   ngOnInit() {
   }
@@ -47,6 +54,10 @@ export class AppComponent implements OnInit {
 
   switchToSignup() {
     this.isSignUp = true;
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   onRegister(email: string, password: string, event: Event) {
@@ -144,6 +155,7 @@ export class AppComponent implements OnInit {
   filterInventory() {
     this.filteredInventory = this.inventoryByCategory[this.selectedCategory];
   }
+
 ///////////Search bar functionality////////////
 /// This function filters the inventory based on the search term entered by the user.
   selectTag(tag: string) {
@@ -192,6 +204,51 @@ export class AppComponent implements OnInit {
       this.filterInventoryByTags();
   }
   
+
+
+  openDialog(item: InventoryItem): void {
+    const dialogRef = this.dialog.open(DeletePopupComponent, {
+      width: '300px',
+      data: { message: `Are you sure you want to delete ${item.item_name}?` },
+      panelClass: 'confirm-deletion-dialog'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Confirmed: Delete item', item);
+        this.deleteItem(item);
+      } else {
+        console.log('Deletion cancelled');
+      }
+    });
+  }
+  deleteItem(itemToDelete: InventoryItem): void {
+    if (this.selectedCategory && this.inventoryByCategory[this.selectedCategory]) {
+      // delete from frontend
+      this.inventoryByCategory[this.selectedCategory] = this.inventoryByCategory[this.selectedCategory].filter(
+        item => item.id !== itemToDelete.id
+      );
+      this.filterInventory(); // get the current inventory after deletion
+  
+      console.log(`Item "${itemToDelete.item_name}" deleted from category "${this.selectedCategory}"`);
+  
+      // deletes in the db
+      if (this.user?.uid) {
+        this.apiService.deleteInventory(this.user.uid, this.selectedCategory, itemToDelete.id).subscribe({
+          next: (res) => {
+            console.log(`Item "${itemToDelete.item_name}" successfully deleted from DB.`);
+          },
+          error: (err) => {
+            console.error(`Failed to delete item from DB:`, err);
+          }
+        });
+      } else {
+        console.error("User ID not found — cannot delete item from DB.");
+      }
+    }
+  }
+  
+
 }
 
 

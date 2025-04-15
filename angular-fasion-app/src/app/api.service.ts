@@ -14,4 +14,8 @@ export class ApiService {
         return this.http.get(
             `${this.apiUrl}/${userId}/inventory`)
     }
+    deleteInventory(userId: string, category: string, clothingId: string) {
+        return this.http.delete(`${this.apiUrl}/${userId}/clothing/${category}/${clothingId}`)
+    }
+    
 }
