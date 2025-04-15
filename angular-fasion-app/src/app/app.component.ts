@@ -137,6 +137,8 @@ export class AppComponent implements OnInit {
     this.selectedCategory = category;
     this.filterInventory();
     this.selectedTag = ''; // Reset selected tag when category changes
+    this.tags = []; // Reset tags when category changes
+    this.filteredInventory = this.inventoryByCategory[this.selectedCategory]; // Reset filtered inventory
   }
 
   filterInventory() {
@@ -150,8 +152,7 @@ export class AppComponent implements OnInit {
   }
 
   filterInventoryByTag() {
-    // If a tag is selected, filter the inventory by that tag.
-    // Otherwise, show all items in the selected category.
+    // If a tag is selected, filter the inventory by that tag. Otherwise, show all items in the selected category.
       if (this.selectedTag) {
       this.filteredInventory = this.inventoryByCategory[this.selectedCategory].filter(item => item.tags && item.tags.includes(this.selectedTag));
     } else {
