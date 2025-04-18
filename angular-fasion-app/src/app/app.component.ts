@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { User } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
+
 import { ModalPopupComponent } from './modal-popup/modal-popup.component';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit  {
   // isLoading = true;
   
 
-  constructor(private authService: AuthService, public dialog: MatDialog, private apiService: ApiService, public dialog: MatDialog) { };
+  constructor(private authService: AuthService, public dialog: MatDialog, private apiService: ApiService) { };
 
   ngOnInit() {
   }
