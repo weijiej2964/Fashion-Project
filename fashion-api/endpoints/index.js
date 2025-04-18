@@ -1,35 +1,35 @@
 // this is the main file for the api 
 // TO DO: connect with firebase auth to get token to only allow authorized users to make calls
 
-const { initializeApp } = require('firebase/app')
-let { getDatabase, ref, set } = require('firebase/database')
+let { getDatabase, ref, set, push } = require('firebase/database')
+let { connectFirebase } = require('../config/connect_firebase.js')
 
 const express = require('express')
 const app = express()
-const firebase = require('firebase/app')
+const router = express.Router();
 const cors = require('cors');
 
-
-app.use(express.json()) // sends json data to PostMan
 app.use(cors({
     origin: 'http://localhost:4200',
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
     credentials: true // Allow cookies and authentication
 }))
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAq7_H5i_ojYQAVYVNAG8usMun5YRX0vUY",
-    authDomain: "fashion-project-e2aba.firebaseapp.com",
-    databaseURL: "https://fashion-project-e2aba-default-rtdb.firebaseio.com",
-    projectId: "fashion-project-e2aba",
-    storageBucket: "fashion-project-e2aba.firebasestorage.app",
-    messagingSenderId: "156468025393",
-    appId: "1:156468025393:web:72f80e880c47dca37f5d10"
-};
+const get_category = require('./get_category')
+const get_clothing = require('./get_clothing')
+const get_inventory = require('./get_inventory')
+const delete_clothing = require('./delete_clothing')
+
+
+app.use(express.json()) // sends json data to PostMan
+app.use(get_category)
+app.use(get_clothing)
+app.use(get_inventory)
+app.use(delete_clothing)
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+connectFirebase()
+
 // Initialize Realtime Database and get a reference to the service
 const database = getDatabase();
 
@@ -47,25 +47,36 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
 
-// no string patterns cause apparently they don't work on express 5 LOL
-// Uploads clothing image and any data associated with it, stores it into the database
+// app.use(cors({
+//     origin: 'http://localhost:4200',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+//     credentials: true // Allow cookies and authentication
+// }))
 
-// TO DO: generate random number for item_id
+// Uploads clothing image and any data associated with it, stores it into the database
 // TO DO: Take care of Firebase warning errors
-// TO DO: MORE ERROR HANDLING... make sure category is actually a category
-app.post('/:user_id/inventory/upload', async (req, res) => { // does this have to be async? idk lets find out 
+// TO DO: Error handling for things not in the data
+// ENHANCEMENTS: add back category error handling...
+app.post('/:user_id/inventory/upload', (req, res) => { // does this have to be async? idk lets find out 
     // im not even too sure if this works like this when we do authentication but we move
-    const Category = new Set(['tops', 'bottoms', 'shoes', 'hats', 'glasses', 'earrings', 'necklaces', 'bracelets', 'watches', 'rings'])
+    const Category = new Set(['top', 'bottom', 'shoes', 'hats', 'glasses', 'earrings', 'necklaces', 'bracelets', 'watches', 'rings', 'accessories', 'outerwear'])
 
 
     console.log(`POST request to upload clothes`)
     try {
         item_id = req.body.item_id
-        // category = (req.body.category).toLowerCase()
+        category = (req.body.category).toLowerCase()
 
-        // if (!Category.has(category)) {
-        //     throw "Given category is not valid"
-        // }
+        if (!Category.has(category)) {
+            // throw new Error("Given category is not valid")
+            // callback(res.send(JSON.stringify(Error("Given category is not valid"))))
+            // callback((Error("Given category is not valid")))
+
+            // return res.status(400)
+            // var err = new Error("Given category is not valid")
+            res.status(400).json({ 'Invalid Input': "Given category is not valid" });
+
+        }
 
         const data = {
             item_name: req.body.item_name,
@@ -75,15 +86,22 @@ app.post('/:user_id/inventory/upload', async (req, res) => { // does this have t
             tags: req.body.tags
         };
 
-        const refPath = "/" + req.params.user_id + "/clothing/" + req.body.category + "/" + item_id + "/"
-        set(ref(database, refPath), data);
 
+        // const refPath = "/" + req.params.user_id + "/clothing/" + req.body.category + "/" + item_id + "/"
+        const refPath = ref(database, `/${req.params.user_id}/clothing/${category}/`)
 
+        // set(ref(database, refPath), data);
+        const item = push(refPath)
+        set(item, data)
     }
     catch (err) {
-        res.send("Upload unsucessful. " + err)
+        // res.send({ err: "Upload unsuccessful" })
+        res.status(500).json({ 'Internal Server Error': err.message });
+        console.log(err.message)
+
+        // next(err)
     }
-    res.send("Upload successful")
+    res.status(201).send({ message: "Upload successful" })
 
 })
 

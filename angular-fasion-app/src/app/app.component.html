@@ -43,26 +43,29 @@
   
 
   <div class="basic-container">
-    <div class="search-container">
-      <!-- Search Bar -->
-      <div class="flex justify-center">
-        <input type="text" placeholder="Search..."
-          class="w-1/2 p-2 rounded-full border border-gray-300 focus:outline-none" />
-      </div>
+    <!-- Search feature bar -->
+    <div class="search-bar-container">
+      <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
+      <!-- Use: when typing (input)="selectTag(selectedTag)" -->
+      <button class="search-button" (click)="addTag(selectedTag)">Add</button>
+      <button class="clear-button" (click)="clearTags()">Clear</button>
+    </div>
+
+    <div class ="tag-container">
+      <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
     </div>
 
     <div class="button-container" style="display: flex; justify-content: flex-end;">
-      <button class="button" (click)="selectCategory('top')">Top</button>
-      <button class="button" (click)="selectCategory('bottom')">Bottom</button>
+      <button class="button" (click)="selectCategory('top')">Tops</button>
+      <button class="button" (click)="selectCategory('bottom')">Bottoms</button>
       <button class="button" (click)="selectCategory('outerwear')">Outerwear</button>
-      <button class="button" (click)="selectCategory('accessory')">Accessory</button>
+      <button class="button" (click)="selectCategory('accessory')">Accessories</button>
       <button class="button" (click)="selectCategory('shoes')">Shoes</button>
     </div>
 
-    <div class="inside-container">
-      <!-- app.component.html -->
+     <!-- <div class="inside-container">
+       app.component.html 
       <div *ngIf="filteredInventory">
-
         <div class="items-grid">
           <div *ngFor="let item of filteredInventory" class="item-card">
             <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
@@ -78,14 +81,59 @@
       <div *ngIf="!filteredInventory">
         <p>No {{selectedCategory}} available at the moment.</p>
       </div>
+      
+    <!-- show results from tags -->
+    <div *ngIf="searchResults.length > 0" class="search-results">
+      <h2>Search Results:</h2>
+      <div class="items-grid">
+        <div *ngFor="let item of searchResults" class="item-card">
+          <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
+          <h3>{{ item.item_name }}</h3>
+          <p>{{ item.item_desc }}</p>
+          <div class="tags">
+            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <!-- This is where clothes will be, on input from button and tag, show clothes-->
+      This is where clothes will be, on input from button and tag, show clothes-->
 
+      <div class="inside-container">
+        <!-- app.component.html -->
+        <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
+          <div class="items-grid">
+            <mat-card *ngFor="let item of filteredInventory" class="item-card">
+              <button class="card-button" (click)="openDialog(item)">
+                <img src="../assets/trash-can.png" alt="Delete Item" class="button-icon">
+              </button>
+              <mat-card-header>
+                <mat-card-title>{{ item.item_name }}</mat-card-title>
+              </mat-card-header>
+              
+              <img mat-card-image [src]="item.image_url" alt="{{ item.item_name }}">
+      
+              <mat-card-content>
+                <p>{{ item.item_desc }}</p>
+                <div class="tags">
+                  <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      
+        <ng-template #noItems>
+          <p style = "text-align: center; margin-top: 40px;">No {{selectedCategory}} available at the moment.</p>
+        </ng-template>
+      </div>
+      
 
+    </div>
   </div>
 
 
-</div>
+<!-- </div>  -->
 
 <div class = "sparkle-toggle">
   <input type = "checkbox" id = "check">
