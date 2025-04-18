@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   selectedTag: string = ''; //default selected tag
   tags: string[] = []; //default tags
   tag: string = ''; //default tag
-  isLoading = true;
+  // isLoading = true;
   
 
   constructor(private authService: AuthService, private apiService: ApiService, public dialog: MatDialog) { };
