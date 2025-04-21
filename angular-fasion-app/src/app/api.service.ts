@@ -19,7 +19,24 @@ export class ApiService {
     }
     
 
-    addInventory(userId: string, addition: object){
-        return this.http.post(`${this.apiUrl}/${userId}/inventory/upload`,addition)
-    }
+    // addInventory(userId: string, addition: object){
+    //     return this.http.post(`${this.apiUrl}/${userId}/inventory/upload`,JSON.stringify(addition))
+    // }
+
+    // addInventory(userId: string, addition: object) {
+    //     const headers = { 'Content-Type': 'application/json' };
+    //     console.log('URL:', `${this.apiUrl}/${userId}/inventory/upload`);
+    //     console.log('Payload:', addition);
+        
+    //     return this.http.post(`${this.apiUrl}/${userId}/inventory/upload`, addition, { headers });
+
+        
+    // }
+
+    addInventory(userId: string, addition: object) {
+        return this.http.post(`${this.apiUrl}/${userId}/inventory/upload`, addition)
+
+      }
+      
+    
 }

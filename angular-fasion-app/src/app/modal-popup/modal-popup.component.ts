@@ -103,7 +103,8 @@ export class ModalPopupComponent {
       "category": this.selectedCategory,
       "tags": this.tagsArray,
       "item_id": Math.floor(Math.random() * 1000000)+1, //generates random # between 1 and 1,000,000(inclusive)
-      "image_blob": this.imageBlob
+      "image_blob": this.imageBlob,
+      "image_url" : "google.com"
       }
       this.apiService.addInventory(this.user.uid, jsonFile).subscribe({
         next: (response) => {

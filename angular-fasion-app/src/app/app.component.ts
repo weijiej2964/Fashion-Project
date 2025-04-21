@@ -263,6 +263,32 @@ export class AppComponent implements OnInit  {
       }
     }
   }
+
+  getItemImage(inventoryItem: { image_blob?: string }): HTMLImageElement | null {
+    if (!inventoryItem.image_blob) {
+      console.error('No image blob found in inventory item.');
+      return null; // Return null if image_blob is missing
+    }
+  
+    try {
+      const blob = new Blob([inventoryItem.image_blob], { type: 'image/png' }); // Adjust type if needed
+      const blobURL = URL.createObjectURL(blob);
+  
+      const img = document.createElement('img');
+      img.src = blobURL;
+      img.alt = 'Inventory Item Image';
+      img.style.width = '300px'; // Example: adjust size
+      img.style.height = 'auto';
+  
+      // Optional: Revoke the Blob URL later to free up resources
+      setTimeout(() => URL.revokeObjectURL(blobURL), 10000);
+  
+      return img;
+    } catch (error) {
+      console.error('Error creating image from blob:', error);
+      return null;
+    }
+  }
   
 
 }
