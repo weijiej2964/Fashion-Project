@@ -20,6 +20,6 @@ export class ApiService {
     
 
     addInventory(userId: string, addition: object){
-        return this.http.post(`${this.apiUrl}/${userId}/inventory`,addition)
+        return this.http.post(`${this.apiUrl}/${userId}/inventory/upload`,addition)
     }
 }
