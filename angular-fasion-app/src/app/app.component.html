@@ -1,6 +1,6 @@
-<div *ngIf="user; else loggedOut">
+<div *ngIf="user; else loggedOut" style = "font-family: Gowun Dodum, serif">
   Welcome, {{ user.email }}!
-  <button (click)="onLogout()">Logout</button>
+  <button class = logout-button (click)="onLogout()">Logout</button>
 
   <div class="icon-container">
     <i class="shuffle-icon"><img src="../assets/shuffle.png" width="50" height="40" alt="shuffle-icon"></i>

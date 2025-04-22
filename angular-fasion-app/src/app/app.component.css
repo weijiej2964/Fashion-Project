@@ -160,7 +160,7 @@ font-style: normal;
   height: 69vh;
   width: 60%;
   position: absolute;
-  right: 0; /* Align to the right of the screen */
+  right: 10px; /* Align to the right of the screen */
   text-align: right;
   background-color: #D4A1FA;
   color: #fff;
@@ -168,73 +168,44 @@ font-style: normal;
   border-radius: 25px;
 }
 
-/* .inside-container {
-  height: 69vh;
-  width: 100%;
-  position: absolute;
-  right: 0; 
-  top: 150px;
-  text-align: right;
 
-  background-color: hsl(0, 0%, 100%);
-  color: #fff;
-  border: 4px solid #433E79;
-  border-radius: 25px;
-  font-size: 16px;
-  color: #000;
-} */
-
-/* --- Styles for the white box container (.inside-container) --- */
 .inside-container {
-  /* Make sure this class name is exactly correct */
-
-  /* Positioning based on your previous code - CHECK THESE ARE PRESENT */
+  height: 69vh; 
   position: absolute;
-  right: 0;
-  top: 150px; /* Adjust this if the box isn't positioned correctly vertically */
-  width: 100%; /* Keep width as 100% of its positioned parent */
-
-  /* Appearance styles - CHECK THESE ARE PRESENT */
-  background-color: hsl(0, 0%, 100%); /* White background */
-  color: #000; /* Text color inside */
+  right: -5px;
+  left: -5px;
+  top: 150px; 
+  /* width: 100%;  */
+  background-color: hsl(0, 0%, 100%);
+  color: #000; 
   border: 4px solid #433E79;
   border-radius: 25px;
   font-size: 16px;
-  text-align: left; /* Changed from right, assuming you want item text left-aligned */
-
-  /* --- Set fixed height AND make it scrollable (ADD OR ENSURE THESE ARE CORRECT) --- */
-  /* Set the fixed height as you had it before */
-  height: 69vh; 
-
-  /* Enable vertical scrolling when content overflows this fixed height */
+  text-align: left; 
   overflow-y: auto;
-
-  /* Hide horizontal scrollbar */
   overflow-x: hidden;
-
-  /* Add padding on the right to prevent content from going under the scrollbar */
   padding-right: 15px;
 }
 
-/* --- Custom Scrollbar Styles (ADD THESE SEPARATELY) --- */
-/* These apply to the scrollbar WITHIN the .inside-container */
 
+
+/* scroll bar */
 .inside-container::-webkit-scrollbar {
-  width: 10px; /* Width of the vertical scrollbar */
+  width: 10px;
 }
 
 .inside-container::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of the scrollbar track */
+  background: #f1f1f1; 
   border-radius: 10px;
 }
 
 .inside-container::-webkit-scrollbar-thumb {
-  background: #888; /* Color of the scrollbar thumb */
+  background: #888; 
   border-radius: 10px;
 }
 
 .inside-container::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Color on hover */
+  background: #555;
 }
 
 .button-container {
@@ -265,7 +236,7 @@ right: 35px;
 }
 
   .button{
-  width: 100px;
+  width: 110px;
   height: 50px;
   background-color: #b837af;
   color: #fff;
@@ -294,7 +265,7 @@ right: 35px;
   input[type="text"] {
   width: 700px;
   height: 50px;
-  border: 2px solid #884376;
+  border: 2px solid #84247D;
   border-radius: 10px;
   font-family: "Gowun Dodum", serif;
   font-size: 18px;
@@ -339,6 +310,7 @@ font-size: 24px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   margin: 20px 0;
+  padding: 0 15px 0 15px;
 }
 
 .item-card {
@@ -389,5 +361,16 @@ font-size: 24px;
 .button-icon {
   width: 30px;
   height: 30px; 
+}
+
+.logout-button {
+  padding: 8px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #9D6C91;
+  border: 2px solid #884376;
+  color: white;
+  font-family: "Gowun Dodum", serif;
+  font-size: 15px;
 }
 
