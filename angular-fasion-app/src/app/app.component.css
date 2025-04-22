@@ -509,5 +509,13 @@ font-size: 24px;
 .user-info-popup p {
     margin-top: 0;
     margin-bottom: 10px;
+  padding: 8px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #9D6C91;
+  border: 2px solid #884376;
+  color: white;
+  font-family: "Gowun Dodum", serif;
+  font-size: 15px;
 }
 
