@@ -512,9 +512,9 @@ font-size: 24px;
   padding: 8px 8px;
   border-radius: 10px;
   cursor: pointer;
-  background-color: #9D6C91;
-  border: 2px solid #884376;
-  color: white;
+  /* background-color: #9D6C91;
+  border: 2px solid #884376; */
+  color: black;
   font-family: "Gowun Dodum", serif;
   font-size: 15px;
 }
