@@ -72,16 +72,29 @@ font-style: normal;
 
 .auth-card form button {
   padding: 0.75rem;
-  background-color: #9D6C91; 
+  background-color: #884376;
+  border: 2px solid #7D2E68;
+  /* background-color: #9D6C91;  */
   color: #fff;
-  border: 2px solid #884376;
+  /* border: 2px solid #884376; */
   border-radius: 4px;
   cursor: pointer;
-  /* font-family: "Roboto", serif; */
+  font-family: "Roboto", serif;
   font-family: "Gowun Dodum", serif;
   font-size: 18px;
 
 }
+
+.auth-card form button:hover {
+  color: #fff;
+  background-color: #7D2E68;
+  border: 2px solid #7D2E68;
+  font-family: "Roboto", serif;
+  font-family: "Gowun Dodum", serif;
+  font-size: 18px;
+
+}
+
 
 .remember-me {
   display: flex;
@@ -147,8 +160,10 @@ font-style: normal;
 }
 
 .toggle-button.active {
-  background-color: #9D6C91;
-  border: 2px solid #884376; 
+  /* background-color: #9D6C91;
+  border: 2px solid #884376;  */
+  background-color: #884376;
+  border: 2px solid #7D2E68;
   color: white;
 }
 
@@ -162,6 +177,7 @@ font-style: normal;
   width: 60%;
   position: absolute;
   right: 10px; /* Align to the right of the screen */
+  top: 50px;
   text-align: right;
   background-color: #D4A1FA;
   color: #fff;
@@ -187,8 +203,6 @@ font-style: normal;
   overflow-x: hidden;
   padding-right: 15px;
 }
-
-
 
 /* scroll bar */
 .inside-container::-webkit-scrollbar {
@@ -252,7 +266,7 @@ font-style: normal;
   .button:focus{
   width: 150px;
   height: 50px;
-  background-color: #b837af;
+  background-color: #84247D;
   border: 2px solid #84247D;
   color: #fff;
   border-radius: 10px;
@@ -260,6 +274,12 @@ font-style: normal;
   font-family: "Gowun Dodum", serif;
   text-align: center;
   font-size: 18px;
+  }
+
+ .button:hover {
+    background-color: #84247D;
+  border: 2px solid #84247D;
+  color: #fff;
   }
 
   input[type="text"] {
@@ -391,11 +411,17 @@ font-size: 24px;
   padding: 8px 15px;
   border-radius: 10px;
   cursor: pointer;
-  background-color: #9D6C91;
-  border: 2px solid #884376;
+  background-color: #884376;
+  border: 2px solid #7D2E68;
   color: white;
   font-family: "Gowun Dodum", serif;
-  font-size: 15px;
+  font-size: 16px;
+}
+
+.logout-button:hover {
+  background-color: #7D2E68;
+  border: 2px solid #7D2E68;
+  color: white;
 }
 
 .search-bar {
@@ -418,6 +444,12 @@ font-size: 24px;
 
 }
 
+.search-button:hover {
+  background-color: #84247D;
+  border: 2px solid #84247D;
+  color: white;
+}
+
 .clear-button {
   margin-right: 10px;
   padding: 8px 15px;
@@ -428,5 +460,54 @@ font-size: 24px;
   color: white;
   font-family: "Gowun Dodum", serif;
   font-size: 15px; 
+}
+
+.clear-button:hover {
+  background-color: #84247D;
+  border: 2px solid #84247D;
+  color: white;
+}
+
+.avatar-container {
+  width: 60px; 
+  height: 60px;
+  border-radius: 50%;
+  background-color: #efd9ce; 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.avatar-container .avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.user-profile-section {
+    position: relative;
+    display: inline-block;
+}
+
+
+.user-info-popup {
+  position: absolute; 
+  top: 60px;
+  left: 0; 
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 100; 
+  border-radius: 5px;
+  min-width: 150px;
+}
+
+.user-info-popup p {
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 

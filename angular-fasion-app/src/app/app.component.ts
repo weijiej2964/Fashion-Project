@@ -41,6 +41,7 @@ export class AppComponent implements OnInit {
   tags: string[] = []; //default tags
   tag: string = ''; //default tag
   // isLoading = true;
+  showUserInfo: boolean = false;
   
 
   constructor(private authService: AuthService, private apiService: ApiService, public dialog: MatDialog) { };
@@ -58,6 +59,10 @@ export class AppComponent implements OnInit {
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  toggleUserInfo() { // Add this method
+    this.showUserInfo = !this.showUserInfo;
   }
 
   onRegister(email: string, password: string, event: Event) {
