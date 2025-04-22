@@ -1,5 +1,5 @@
-<div *ngIf="user; else loggedOut" style = "font-family: Gowun Dodum, serif">
-  Welcome, {{ user.email }}!
+<div *ngIf="user; else loggedOut" style = "font-family: Gowun Dodum, serif; font-size: 20px;">
+  Hello, {{ user.email }}!
   <button class = logout-button (click)="onLogout()">Logout</button>
 
   <div class="icon-container">
