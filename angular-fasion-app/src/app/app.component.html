@@ -1,6 +1,6 @@
-<div *ngIf="user; else loggedOut">
+<div *ngIf="user; else loggedOut" style = "font-family: Gowun Dodum, serif">
   Welcome, {{ user.email }}!
-  <button (click)="onLogout()">Logout</button>
+  <button class = logout-button (click)="onLogout()">Logout</button>
 
   <div class="icon-container">
     <i class="shuffle-icon"><img src="../assets/shuffle.png" width="50" height="40" alt="shuffle-icon"></i>
@@ -142,8 +142,8 @@
       <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
-        <label>
-          <input type="checkbox" /> Remember Me
+        <label style = "font-family: Gowun Dodum, serif;">
+          <input type="checkbox"/> Remember Me
         </label>
         <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
       </form>

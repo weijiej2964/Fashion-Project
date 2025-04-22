@@ -236,14 +236,14 @@ export class AppComponent implements OnInit {
       if (this.user?.uid) {
         this.apiService.deleteInventory(this.user.uid, this.selectedCategory, itemToDelete.id).subscribe({
           next: (res) => {
-            console.log(`Item "${itemToDelete.item_name}" successfully deleted from DB.`);
+            console.log(`"${itemToDelete.item_name}" was successfully deleted!`);
           },
           error: (err) => {
-            console.error(`Failed to delete item from DB:`, err);
+            console.error(`Failed to delete item:`, err);
           }
         });
       } else {
-        console.error("User ID not found — cannot delete item from DB.");
+        console.error("User ID not found, cannot delete item.");
       }
     }
   }
