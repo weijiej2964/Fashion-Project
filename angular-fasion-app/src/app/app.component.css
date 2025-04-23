@@ -110,7 +110,6 @@ font-style: normal;
   margin: 1rem 0;
   font-weight: 900;
   color: #000;
-  font-family: "Gowun Dodum", serif;
 }
 
 .social-icons {
@@ -350,6 +349,7 @@ font-size: 24px;
   border-radius: 8px;
   padding: 15px;
   transition: transform 0.2s;
+  font-family: Gowun Dodum, serif;
 }
 
 .item-card:hover {
@@ -525,5 +525,9 @@ font-size: 24px;
 .user-info-popup p {
     margin-top: 0;
     margin-bottom: 10px;
+}
+
+.mat-mdc-card-title {
+  font-family: "Gowun Dodum", serif;
 }
 

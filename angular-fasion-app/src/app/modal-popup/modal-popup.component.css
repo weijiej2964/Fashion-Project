@@ -1,138 +1,132 @@
 modal-popup.component.css
 
 
+.file-input-wrapper {
+  width: 100%;  
+  margin-bottom: 20px; 
+}
+
 .custom-file-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 16px; /* Add padding to make it look like a button */
-  font-size: 14px;
+  margin-left: 30%;
+  margin-right: auto;
+  padding: 8px 16px;
+  font-size: 16px;
   font-weight: bold;
-  background-color: #1976d2; /* Blue background */
-  color: white; /* White text */
-  border: none;
-  border-radius: 4px; /* Slightly rounded corners */
+  background-color: #884376;
+  border: 2px solid #7D2E68;
+  border-radius: 4px;
   cursor: pointer;
-  text-transform: uppercase; /* Make the text uppercase */
+  font-family: "Gowun Dodum", serif;
+  color: white;
+  float: none;
+  position: static;
 }
 
-.custom-file-button:hover {
-  background-color: #e3cacf; /* Darker blue on hover */
-}
 
-.custom-file-button:active {
-  background-color: #e3cacf; /* Even darker blue when clicked */
-}
-
-.custom-file-button:focus {
-  outline: none; /* Remove the default focus outline */
-  box-shadow: 0 0 3px 2px rgba(25, 118, 210, 0.5); /* Custom focus style */
-}
 
 .tags-container {
-  display: flex; /* Flex container for tags */
-  flex-wrap: wrap; /* Wrap tags to the next line if needed */
-  justify-content: flex-start; /* Align tags to the left */
-  align-items: flex-start; /* Align items to the top */
-  margin-bottom: 16px; /* Add some space below the tags container */
-  width: 100%; /* Ensure the container spans the full form width */
-  background-color: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
 }
+
 
 .word-item {
-  display: inline-flex; /* Keep tag and button inline */
+  display: inline-flex;
   align-items: center;
-  background-color: #F2DDE1; /* Light gray background for tags */
-  border-radius: 20px; /* Pill shape */
-  padding: 6px 12px; /* Space inside each tag */
-  margin: 4px; /* Space between tags */
-  font-size: 14px; /* Font size for tag text */
-  font-weight: bold; /* Bold text */
-  color: #333; /* Text color */
+  background-color: #F2DDE1;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
 }
-.modal-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    height: 100%; /* Ensure it takes up the full height */
-  }
-  img {
-    max-width: 60%; /* Ensures the image doesn't overflow its container */
-    height: auto;    /* Maintains the image's aspect ratio */
-  }
-  
-  /* Centering the form */
-  .form-container {
-    /* text-align: left; */
-    overflow:hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 400px; /* Set max width for better control */
-  }
-  
-  /* Center individual form fields */
-  .centered-field {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  /* Optional: Styling for the action buttons */
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-/* modal-popup.component.css */
+.word-item button.mat-icon-button {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
+    margin-left: 5px;
+}
+.word-item button.mat-icon-button mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
 
-/* Change background color for the mat-select dropdown */
-.mat-select-panel {
-    background-color: #fff !important; /* Set to white or any color you prefer */
-  }
-  
-  /* Optional: Change the background color of the selected option */
-  .mat-select-value {
-    background-color: #f0f0f0; /* Light background for selected value */
-  }
-  
-  /* Customize the mat-option background on hover */
-  .mat-option:hover {
-    background-color: #1976d2 !important; /* Highlight on hover with a color of your choice */
-    color: white !important; /* Change text color to white when hovered */
-  }
-  
-  /* Optional: Change the background color of the focused item */
-  .mat-option.mat-selected {
+
+.centered-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.image-preview { 
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    padding: 5px;
+    display: block;
+    margin: 10px auto; 
+}
+
+
+.mat-dialog-container {
+    border-radius: 16px;
+}
+
+
+::ng-deep .mat-select-panel {
+    background-color: #ffffff !important;
+    border-radius: 8px !important;
+}
+::ng-deep .mat-option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+::ng-deep .mat-option:hover {
+    background-color: #f0f0f0 !important;
+}
+::ng-deep .mat-option.mat-selected {
     background-color: #1976d2 !important;
     color: white !important;
-  }
-    
-  /* Round the corners of the modal for this specific component */
-.mat-dialog-container {
-    border-radius: 16px; /* Adjust the value as needed */
-    overflow:hidden;
-  }
+}
 
-  
 
-  /* Ensure mat-select dropdown panel has a solid background */
-::ng-deep .mat-select-panel {
-    background-color: #ffffff !important; /* Set solid white background */
-    border-radius: 8px !important;         /* Optional: rounded corners */
-  }
-  
-  /* Ensure mat-option items have a solid background */
-  ::ng-deep .mat-option {
-    background-color: #ffffff !important; /* Set solid white background */
-    color: #000000 !important;            /* Set text color to black */
-  }
-  
-  /* Optional: Change background color of mat-option on hover */
-  ::ng-deep .mat-option:hover {
-    background-color: #f0f0f0 !important; /* Light grey on hover */
-  }
-  
+mat-dialog-actions button {
+  border: none; /* Removes any solid border */
+
+
+   &:focus { /* Add custom focus style */
+     box-shadow: 0 0 0 2px #1976d2;
+   }
+}
+
+
+
+mat-dialog-content::-webkit-scrollbar {
+  width: 8px;
+}
+mat-dialog-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+mat-dialog-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+mat-dialog-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+mat-dialog-content {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}

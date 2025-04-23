@@ -1,4 +1,4 @@
-<div *ngIf="user; else loggedOut">
+<div *ngIf="user; else loggedOut" style="font-family: Gowun Dodum, serif;">
   <div class="user-profile-section">
     <div class="avatar-container" (click)="toggleUserInfo()">
       <img src="../assets/avatar.png" alt="Avatar" class="avatar">
@@ -51,7 +51,7 @@
   <!-- <script src="add-popup.js"></script> Link to the JS file -->
   
 
-  <div class="basic-container">
+  <div class="basic-container" style="font-family: Gowun Dodum, serif;">
     <div class="search-bar-container">
       <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
       <button class="search-button" (click)="addTag(selectedTag)">Add</button>
@@ -95,7 +95,7 @@
       <div class="items-grid">
         <div *ngFor="let item of searchResults" class="item-card">
           <img [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
-          <h3>{{ item.item_name }}</h3>
+          <h3 style="font-family: Gowun Dodum, serif;">{{ item.item_name }}</h3>
           <p>{{ item.item_desc }}</p>
           <div class="tags">
             <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
