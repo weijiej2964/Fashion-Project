@@ -492,6 +492,8 @@ font-size: 24px;
   align-items: center; 
   cursor: pointer;
   margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .avatar-container .avatar {
@@ -510,7 +512,7 @@ font-size: 24px;
 .user-info-popup {
   position: absolute; 
   top: 60px;
-  left: 0; 
+  left: 10px; 
   background-color: white;
   border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
