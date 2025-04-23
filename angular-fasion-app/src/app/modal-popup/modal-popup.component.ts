@@ -74,7 +74,7 @@ export class ModalPopupComponent {
   categories: string[] = ['Top', 'Bottom', 'Outerwear', 'Accessory', 'Shoes']; // Sample categories
   tagsArray: string[] = []; // Array for managing tags
   newTag: string = '';
-  imageBlob: Blob | null = null;
+  imageBase64: string | null = null;
   // authService: any;
   user: any;
  
@@ -95,7 +95,7 @@ export class ModalPopupComponent {
     console.log('Item Description:', this.itemDescription);
     console.log('Category:', this.selectedCategory);
     console.log('Tags:', this.tagsArray);
-    console.log('Image Blob:', this.imageBlob);
+    console.log('Image Blob:', this.imageBase64);
 
     const jsonFile = {
       "item_name": this.itemName,
@@ -103,7 +103,7 @@ export class ModalPopupComponent {
       "category": this.selectedCategory,
       "tags": this.tagsArray,
       "item_id": Math.floor(Math.random() * 1000000)+1, //generates random # between 1 and 1,000,000(inclusive)
-      "image_blob": this.imageBlob,
+      "image_blob": this.imageBase64,
       "image_url" : "google.com"
       }
       this.apiService.addInventory(this.user.uid, jsonFile).subscribe({
@@ -133,88 +133,60 @@ export class ModalPopupComponent {
     console.log('Remove button clicked for index:', index);
     this.tagsArray.splice(index, 1); // Remove the word at the specified index
   }
-  
-  // onImageUpload(event: any): void {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e: any) => {
-  //       // Using sanitizer to bypass security check for the image URL
-  //       this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
+ 
 
-  // onImageUpload(event: any): void {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  
-  //     // Convert file to Base64 URL for preview
-  //     reader.onload = (e: any) => {
-  //       // Use the sanitizer for the image URL (Angular-specific security measure)
-  //       this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
-  
-  //       // Convert the file to a Blob
-  //       const binaryString = atob(e.target.result.split(',')[1]); // Decode Base64
-  //       const arrayBuffer = new ArrayBuffer(binaryString.length);
-  //       const uint8Array = new Uint8Array(arrayBuffer);
-  
-  //       for (let i = 0; i < binaryString.length; i++) {
-  //         uint8Array[i] = binaryString.charCodeAt(i);
-  //       }
-  
-  //       this.imageBlob = new Blob([uint8Array], { type: file.type });
-  //       console.log('Blob created:', this.imageBlob);
-  //     };
-  
-  //     reader.readAsDataURL(file); // Read the file as a Base64 string
-  //   }
-  // }
-
-  // convertBlobToBase64(blob: Blob): Promise<string> {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-      
-  //     reader.onloadend = () => {
-  //       resolve(reader.result as string); // Base64 encoded string
-  //     };
-  
-  //     reader.onerror = (error) => {
-  //       reject(error);
-  //     };
-  
-  //     reader.readAsDataURL(blob); // Reads Blob and converts to Base64
-  //   });
-  // }
-  
-  converts image to blob
   onImageUpload(event: any): void {
     const file = event.target.files[0];
   
     if (file) {
-      // Validate file type
-      if (!['image/jpeg', 'image/png'].includes(file.type)) {
-        console.error('Invalid file type! Please upload a JPG or PNG.');
-        return;
-      }
-  
       const reader = new FileReader();
   
       reader.onload = (e: any) => {
-        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
-        
-        const base64Data = e.target.result; // Base64 image for storage
-        this.imageBlob = base64Data; 
+        const img = new Image();
+        img.src = e.target.result;
   
-        console.log('Base64 image:', this.imageBlob);
+        img.onload = () => {
+          const MAX_WIDTH = 500;
+          const MAX_HEIGHT = 500;
+  
+          let width = img.width;
+          let height = img.height;
+  
+          if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+            const aspectRatio = width / height;
+  
+            if (width > height) {
+              width = MAX_WIDTH;
+              height = MAX_WIDTH / aspectRatio;
+            } else {
+              height = MAX_HEIGHT;
+              width = MAX_HEIGHT * aspectRatio;
+            }
+          }
+  
+          // Create a canvas for resizing
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          canvas.width = width;
+          canvas.height = height;
+  
+          // Draw resized image onto canvas
+          ctx?.drawImage(img, 0, 0, width, height);
+  
+          // Convert canvas to Base64 (keeping variable name as imageBlob)
+          this.imageBase64 = canvas.toDataURL(file.type);
+          this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.imageBase64);
+  
+          console.log('Resized Base64 Image:', this.imageBase64);
+        };
       };
   
       reader.readAsDataURL(file);
     }
-    console.log('Base64 Image Data:', this.imageBlob);
-
   }
+  
+  
+
+  
   
 }

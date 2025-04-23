@@ -20,13 +20,13 @@ const database = getDatabase(app);
 //   });
 //}
 type Category = 'Tops' | 'Bottoms' | 'Shoes' | 'Hats' | 'Glasses' | 'Earrings' | 'Necklaces' | 'Bracelets' | 'Watches' | 'Rings';
-function addClothes(itemID: number, uid: number, itemName: string, itemDesc: string, image_url: string, imageBlob: Blob, category: Category) {
+function addClothes(itemID: number, uid: number, itemName: string, itemDesc: string, image_url: string, imageBase64: string, category: Category) {
   set(ref(database, 'Clothes/' + itemID), {
     UID: uid,
     Item_Name: itemName,
     Item_Desc: itemDesc,
     Image_url: image_url,
-    Image_Blob: imageBlob,
+    Image_Base64:imageBase64,
     Category: category
   });
 }
