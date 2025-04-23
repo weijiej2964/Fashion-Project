@@ -41,6 +41,7 @@ export class AppComponent implements OnInit  {
   tags: string[] = []; //default tags
   tag: string = ''; //default tag
   // isLoading = true;
+  showUserInfo: boolean = false;
   
 
   constructor(private authService: AuthService, public dialog: MatDialog, private apiService: ApiService) { };
@@ -58,6 +59,10 @@ export class AppComponent implements OnInit  {
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  toggleUserInfo() { // Add this method
+    this.showUserInfo = !this.showUserInfo;
   }
 
   ngAfterViewInit() {
@@ -252,10 +257,10 @@ export class AppComponent implements OnInit  {
       if (this.user?.uid) {
         this.apiService.deleteInventory(this.user.uid, this.selectedCategory, itemToDelete.id).subscribe({
           next: (res) => {
-            console.log(`Item "${itemToDelete.item_name}" successfully deleted from DB.`);
+            console.log(`"${itemToDelete.item_name}" was successfully deleted!`);
           },
           error: (err) => {
-            console.error(`Failed to delete item from DB:`, err);
+            console.error(`Failed to delete item:`, err);
           }
         });
       } else {

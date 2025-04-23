@@ -26,6 +26,7 @@
 
   h2 {
     text-align: center;
+    font-family: "Gowun Dodum", serif;
   }
   
   .centered-content {
@@ -35,41 +36,48 @@
 
   p {
     text-align: center;
+    font-size: 16px;
+    font-family: "Gowun Dodum", serif;
   }
   
   .actions {
     display: flex;
-    justify-content: space-between; /* Adjust as needed: space-around, flex-end */
+    justify-content: space-between; 
     width: 100%;
     margin-top: 20px;
   }
   
   .actions button {
-    border-radius: 8px; /* Optional: add some rounding to buttons */
+    border-radius: 8px; 
     padding: 8px 16px;
   }
   
-  /* If you want the "Yes" button to have a distinct style */
+  
   .actions button[color="warn"] {
-    background-color: #9EBD9E; /* Example red color */
+    background-color: #9EBD9E; 
     border: 1px solid #344E41;
     color: #344E41;
+    font-family: "Gowun Dodum", serif;
+    font-size: 16px;
   }
   
   .actions button[color="warn"]:hover {
     background-color: #344E41;
     color: #ffff;
+    font-family: "Gowun Dodum", serif;
   }
   
-  /* You can also style the "No" button differently if needed */
+
   .actions button:not([color="warn"]) {
-    /* Add styles for the "No" button */
     background-color: #F7A1A5;
     border: 1px solid #B80000;
     color: #B80000;
+    font-family: "Gowun Dodum", serif;
+    font-size: 16px;
   }
 
   .actions button:not([color="warn"]):hover {
     background-color: #B80000;
     color: #ffff;
+    font-family: "Gowun Dodum", serif;
   }
