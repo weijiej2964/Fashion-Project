@@ -358,14 +358,14 @@ font-size: 24px;
 }
 
 .item-image {
-  /* width: 100%; */
-  /* height: 200px; */
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 60%; 
   object-fit: cover;
   border-radius: 4px;
-  margin-bottom: 10px;
+  display: block;
+  margin: 10px auto 10px auto;
 }
+
 
 .tags {
   margin-top: 10px;
