@@ -146,31 +146,75 @@ export class ModalPopupComponent {
   //   }
   // }
 
+  // onImageUpload(event: any): void {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  
+  //     // Convert file to Base64 URL for preview
+  //     reader.onload = (e: any) => {
+  //       // Use the sanitizer for the image URL (Angular-specific security measure)
+  //       this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
+  
+  //       // Convert the file to a Blob
+  //       const binaryString = atob(e.target.result.split(',')[1]); // Decode Base64
+  //       const arrayBuffer = new ArrayBuffer(binaryString.length);
+  //       const uint8Array = new Uint8Array(arrayBuffer);
+  
+  //       for (let i = 0; i < binaryString.length; i++) {
+  //         uint8Array[i] = binaryString.charCodeAt(i);
+  //       }
+  
+  //       this.imageBlob = new Blob([uint8Array], { type: file.type });
+  //       console.log('Blob created:', this.imageBlob);
+  //     };
+  
+  //     reader.readAsDataURL(file); // Read the file as a Base64 string
+  //   }
+  // }
+
+  // convertBlobToBase64(blob: Blob): Promise<string> {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+      
+  //     reader.onloadend = () => {
+  //       resolve(reader.result as string); // Base64 encoded string
+  //     };
+  
+  //     reader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  
+  //     reader.readAsDataURL(blob); // Reads Blob and converts to Base64
+  //   });
+  // }
+  
+  converts image to blob
   onImageUpload(event: any): void {
     const file = event.target.files[0];
+  
     if (file) {
+      // Validate file type
+      if (!['image/jpeg', 'image/png'].includes(file.type)) {
+        console.error('Invalid file type! Please upload a JPG or PNG.');
+        return;
+      }
+  
       const reader = new FileReader();
   
-      // Convert file to Base64 URL for preview
       reader.onload = (e: any) => {
-        // Use the sanitizer for the image URL (Angular-specific security measure)
         this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
+        
+        const base64Data = e.target.result; // Base64 image for storage
+        this.imageBlob = base64Data; 
   
-        // Convert the file to a Blob
-        const binaryString = atob(e.target.result.split(',')[1]); // Decode Base64
-        const arrayBuffer = new ArrayBuffer(binaryString.length);
-        const uint8Array = new Uint8Array(arrayBuffer);
-  
-        for (let i = 0; i < binaryString.length; i++) {
-          uint8Array[i] = binaryString.charCodeAt(i);
-        }
-  
-        this.imageBlob = new Blob([uint8Array], { type: file.type });
-        console.log('Blob created:', this.imageBlob);
+        console.log('Base64 image:', this.imageBlob);
       };
   
-      reader.readAsDataURL(file); // Read the file as a Base64 string
+      reader.readAsDataURL(file);
     }
+    console.log('Base64 Image Data:', this.imageBlob);
+
   }
   
 }

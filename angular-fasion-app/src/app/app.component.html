@@ -82,12 +82,12 @@
         <p>No {{selectedCategory}} available at the moment.</p>
       </div>
       
-    <!-- show results from tags -->
+     show results from tags -->
     <div *ngIf="searchResults.length > 0" class="search-results">
       <h2>Search Results:</h2>
       <div class="items-grid">
         <div *ngFor="let item of searchResults" class="item-card">
-          <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
+          <img [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
           <h3>{{ item.item_name }}</h3>
           <p>{{ item.item_desc }}</p>
           <div class="tags">
@@ -108,9 +108,9 @@
               <mat-card-header>
                 <mat-card-title>{{ item.item_name }}</mat-card-title>
               </mat-card-header>
-              
-              <img mat-card-image [src]="item.image_url" alt="{{ item.item_name }}">
-      
+              <!-- <p>{{ item.image_blob }}</p>  -->
+
+              <img mat-card-image [src]="item.image_blob" alt="{{ item.item_name }}"  class="item-image">
               <mat-card-content>
                 <p>{{ item.item_desc }}</p>
                 <div class="tags">
@@ -133,11 +133,11 @@
 
 <!-- </div>  -->
 
-<div class = "sparkle-toggle">
+<!-- <div class = "sparkle-toggle">
   <input type = "checkbox" id = "check">
-  <label for = "check" class = "button"></label>
+  <label for = "check" class = "button"></label> -->
 
-</div>
+<!-- </div> -->
 <ng-template #loggedOut>
   <!-- Auth Container (holds both Sign Up and Login) -->
   <div class="auth-container">

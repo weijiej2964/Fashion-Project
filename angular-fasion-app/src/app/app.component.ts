@@ -271,7 +271,7 @@ export class AppComponent implements OnInit  {
     }
   
     try {
-      const blob = new Blob([inventoryItem.image_blob], { type: 'image/png' }); // Adjust type if needed
+      const blob = new Blob([inventoryItem.image_blob], { type: 'image/png' }); 
       const blobURL = URL.createObjectURL(blob);
   
       const img = document.createElement('img');
