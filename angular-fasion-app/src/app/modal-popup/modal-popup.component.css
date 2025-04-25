@@ -22,6 +22,10 @@ modal-popup.component.css
   position: static;
 }
 
+.custom-file-button:hover {
+  background-color: #7D2E68;
+}
+
 
 
 .tags-container {
