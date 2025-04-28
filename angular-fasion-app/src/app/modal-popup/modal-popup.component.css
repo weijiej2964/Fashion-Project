@@ -1,0 +1,136 @@
+modal-popup.component.css
+
+
+.file-input-wrapper {
+  width: 100%;  
+  margin-bottom: 20px; 
+}
+
+.custom-file-button {
+  margin-left: 30%;
+  margin-right: auto;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #884376;
+  border: 2px solid #7D2E68;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Gowun Dodum", serif;
+  color: white;
+  float: none;
+  position: static;
+}
+
+.custom-file-button:hover {
+  background-color: #7D2E68;
+}
+
+
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  width: 100%;
+  padding: 0 5px;
+  box-sizing: border-box;
+}
+
+
+.word-item {
+  display: inline-flex;
+  align-items: center;
+  background-color: #F2DDE1;
+  border-radius: 20px;
+  padding: 6px 12px;
+  margin: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+.word-item button.mat-icon-button {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0;
+    margin-left: 5px;
+}
+.word-item button.mat-icon-button mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+
+.centered-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+.image-preview { 
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    padding: 5px;
+    display: block;
+    margin: 10px auto; 
+}
+
+
+.mat-dialog-container {
+    border-radius: 16px;
+}
+
+
+::ng-deep .mat-select-panel {
+    background-color: #ffffff !important;
+    border-radius: 8px !important;
+}
+::ng-deep .mat-option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+::ng-deep .mat-option:hover {
+    background-color: #f0f0f0 !important;
+}
+::ng-deep .mat-option.mat-selected {
+    background-color: #1976d2 !important;
+    color: white !important;
+}
+
+
+mat-dialog-actions button {
+  border: none; /* Removes any solid border */
+
+
+   &:focus { /* Add custom focus style */
+     box-shadow: 0 0 0 2px #1976d2;
+   }
+}
+
+
+
+mat-dialog-content::-webkit-scrollbar {
+  width: 8px;
+}
+mat-dialog-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+mat-dialog-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+mat-dialog-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+mat-dialog-content {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}

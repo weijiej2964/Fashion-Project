@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Global style to modify Angular Material Dialog */
+/* styles.css or global stylesheet */
+
+/* Optional: Adjust the modal container's appearance */
+.mat-dialog-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff; /* Make sure the background is white */
+    border-radius: 8px;
+  }
+  /* Force white background on the dropdown */
+.mat-select-panel {
+    background-color: #ffffff !important;
+  }
+  
+  .mat-option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .mat-option:hover {
+    background-color: #f0f0f0 !important;
+  }
+  

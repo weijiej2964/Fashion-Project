@@ -16,7 +16,42 @@
     <div class="edit-icon"></div>
   </div>
 
-  <div class="basic-container">
+ 
+  <button mat-button (click)="openModal()" id = "add-icon"><img src="../assets/add-icon.png" width="50" height="40" alt="Add icon"></button> 
+  <!-- <button class="icon-button add-container" id="addPopup">
+    <img src="../assets/add-icon.png" width="50" height="40" alt="Add icon">
+  </button> -->
+  
+  <!-- <div id="add-popup" class="popup">
+    <div class="popup-content">
+      <span id="closePopupBtn" class="close-btn">&times;</span>
+      <h2>Enter Item Information</h2>
+      <form id="popupForm" enctype="multipart/form-data">
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="itemName" required>
+  
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+          <option value="">Select a category</option>
+          <option value="Tops">Tops</option>
+          <option value="Bottoms">Bottoms</option>
+          <option value="One-Piece">One Piece</option>
+          <option value="Accessory">Accessory</option>
+          <option value="Shoes">Shoes</option>
+        </select>
+  
+        <label for="image">Image:</label>
+        <input type="file" id="image" name="image" accept="image/jpeg, image/png" required>
+  
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div> -->
+  
+  <!-- <script src="add-popup.js"></script> Link to the JS file -->
+  
+
+  <div class="basic-container" style="font-family: Gowun Dodum, serif;">
     <div class="search-bar-container">
       <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
       <button class="search-button" (click)="addTag(selectedTag)">Add</button>
@@ -35,12 +70,32 @@
       <button class="button" (click)="selectCategory('shoes')">Shoes</button>
     </div>
 
-     <div *ngIf="searchResults.length > 0" class="search-results">
+     <!-- <div class="inside-container">
+       app.component.html 
+      <div *ngIf="filteredInventory">
+        <div class="items-grid">
+          <div *ngFor="let item of filteredInventory" class="item-card">
+            <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
+            <h3>{{ item.item_name }}</h3>
+            <p>{{ item.item_desc }}</p>
+            <div class="tags">
+              <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!filteredInventory">
+        <p>No {{selectedCategory}} available at the moment.</p>
+      </div>
+      
+     show results from tags -->
+    <div *ngIf="searchResults.length > 0" class="search-results">
       <h2>Search Results:</h2>
       <div class="items-grid">
         <div *ngFor="let item of searchResults" class="item-card">
-          <img [src]="item.image_url" alt="{{ item.item_name }}" class="item-image">
-          <h3>{{ item.item_name }}</h3>
+          <img [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
+          <h3 style="font-family: Gowun Dodum, serif;">{{ item.item_name }}</h3>
           <p>{{ item.item_desc }}</p>
           <div class="tags">
             <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
@@ -49,7 +104,6 @@
       </div>
 
     </div>
-
       <div class="inside-container">
         <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
           <div class="items-grid">
@@ -60,9 +114,9 @@
               <mat-card-header>
                 <mat-card-title>{{ item.item_name }}</mat-card-title>
               </mat-card-header>
+              <!-- <p>{{ item.image_blob }}</p>  -->
 
-              <img mat-card-image [src]="item.image_url" alt="{{ item.item_name }}">
-
+              <img mat-card-image [src]="item.image_blob" alt="{{ item.item_name }}"  class="item-image">
               <mat-card-content>
                 <p>{{ item.item_desc }}</p>
                 <div class="tags">
@@ -83,6 +137,7 @@
   </div>
 
 
+<!-- </div> -->
 <ng-template #loggedOut>
   <div class="auth-container">
     <h1>Welcome to StyleMe!</h1>
