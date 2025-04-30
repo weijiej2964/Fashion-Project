@@ -16,17 +16,21 @@ on left side of screen, should be the items displayed -->
 </div>
 
 <!-- this is jonathans code -->
-<div class="search-bar-container">
-    <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
-    <!-- Use: when typing (input)="selectTag(selectedTag)" -->
-    <button class="search-button" (click)="addTag(selectedTag)">Add</button>
-    <button class="clear-button" (click)="clearTags()">Clear</button>
-</div>
+<mat-dialog-content>
 
-<div class="tag-container">
-    <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
-</div>
+    <div class="search-bar-container">
+        <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
+        <!-- Use: when typing (input)="selectTag(selectedTag)" -->
+        <button class="search-button" (click)="addTag(selectedTag)">Add</button>
+        <button class="clear-button" (click)="clearTags()">Clear</button>
+    </div>
 
-<div class="confirmation">
-    <button (click)="shuffle()">OK</button>
-</div>
+    <div class="tag-container">
+        <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
+    </div>
+
+    <div class="confirmation">
+        <button (click)="shuffle()">OK</button>
+    </div>
+
+</mat-dialog-content>

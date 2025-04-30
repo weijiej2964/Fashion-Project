@@ -11,19 +11,35 @@
     </div>
   </div>
 
-  <div class="icon-container">
+  <!-- <div class="icon-container">
     <i class="shuffle-icon"><img src="../assets/shuffle.png" width="50" height="40" alt="shuffle-icon"></i>
     <div class="edit-icon"></div>
-  </div>
+  </div> -->
+
+  <button mat-button (click)="shuffle()"><img src="../assets/shuffle-icon.png" width="50" height="40"
+      alt="shuffle icon"></button>
+  <!-- idk if we need class, can use ngif to separate it based off of category -->
+  <div *ngIf="shuffledOutfit.length > 0">
+    <h2>Search Results:</h2>
+    <div class="items-grid">
+      <div *ngFor="let item of shuffledOutfit | keyvalue" class="item-card">
+        <img [src]="item.value.image_blob" alt="{{ item.value.item_name }}" class="item-image">
+        <h3 style="font-family: Gowun Dodum, serif;">{{ item.value.item_name }}</h3>
+        <p>{{ item.value.item_desc }}</p>
+        <div class="tags">
+          <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
 
 
-  <button mat-button (click)="openModal()" id="add-icon"><img src="../assets/add-icon.png" width="50" height="40"
-      alt="Add icon"></button>
-  <!-- <button class="icon-button add-container" id="addPopup">
+    <button mat-button (click)="openModal()" id="add-icon"><img src="../assets/add-icon.png" width="50" height="40"
+        alt="Add icon"></button>
+    <!-- <button class="icon-button add-container" id="addPopup">
     <img src="../assets/add-icon.png" width="50" height="40" alt="Add icon">
   </button> -->
 
-  <!-- <div id="add-popup" class="popup">
+    <!-- <div id="add-popup" class="popup">
     <div class="popup-content">
       <span id="closePopupBtn" class="close-btn">&times;</span>
       <h2>Enter Item Information</h2>
@@ -49,29 +65,29 @@
     </div>
   </div> -->
 
-  <!-- <script src="add-popup.js"></script> Link to the JS file -->
+    <!-- <script src="add-popup.js"></script> Link to the JS file -->
 
 
-  <div class="basic-container" style="font-family: Gowun Dodum, serif;">
-    <div class="search-bar-container">
-      <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
-      <button class="search-button" (click)="addTag(selectedTag)">Add</button>
-      <button class="clear-button" (click)="clearTags()">Clear</button>
-    </div>
+    <div class="basic-container" style="font-family: Gowun Dodum, serif;">
+      <div class="search-bar-container">
+        <input type="text" [(ngModel)]="selectedTag" placeholder="Search for items..." class="search-bar" />
+        <button class="search-button" (click)="addTag(selectedTag)">Add</button>
+        <button class="clear-button" (click)="clearTags()">Clear</button>
+      </div>
 
-    <div class="tag-container">
-      <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
-    </div>
+      <div class="tag-container">
+        <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
+      </div>
 
-    <div class="button-container" style="display: flex; justify-content: flex-end;">
-      <button class="button" (click)="selectCategory('top')">Tops</button>
-      <button class="button" (click)="selectCategory('bottom')">Bottoms</button>
-      <button class="button" (click)="selectCategory('outerwear')">Outerwear</button>
-      <button class="button" (click)="selectCategory('accessory')">Accessories</button>
-      <button class="button" (click)="selectCategory('shoes')">Shoes</button>
-    </div>
+      <div class="button-container" style="display: flex; justify-content: flex-end;">
+        <button class="button" (click)="selectCategory('top')">Tops</button>
+        <button class="button" (click)="selectCategory('bottom')">Bottoms</button>
+        <button class="button" (click)="selectCategory('outerwear')">Outerwear</button>
+        <button class="button" (click)="selectCategory('accessory')">Accessories</button>
+        <button class="button" (click)="selectCategory('shoes')">Shoes</button>
+      </div>
 
-    <!-- <div class="inside-container">
+      <!-- <div class="inside-container">
        app.component.html 
       <div *ngIf="filteredInventory">
         <div class="items-grid">
@@ -91,105 +107,107 @@
       </div>
       
      show results from tags -->
-    <div *ngIf="searchResults.length > 0" class="search-results">
-      <h2>Search Results:</h2>
-      <div class="items-grid">
-        <div *ngFor="let item of searchResults" class="item-card">
-          <img [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
-          <h3 style="font-family: Gowun Dodum, serif;">{{ item.item_name }}</h3>
-          <p>{{ item.item_desc }}</p>
-          <div class="tags">
-            <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+      <div *ngIf="searchResults.length > 0" class="search-results">
+        <h2>Search Results:</h2>
+        <div class="items-grid">
+          <div *ngFor="let item of searchResults" class="item-card">
+            <img [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
+            <h3 style="font-family: Gowun Dodum, serif;">{{ item.item_name }}</h3>
+            <p>{{ item.item_desc }}</p>
+            <div class="tags">
+              <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+            </div>
           </div>
         </div>
+
+      </div>
+      <div class="inside-container">
+        <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
+          <div class="items-grid">
+            <mat-card *ngFor="let item of filteredInventory" class="item-card">
+              <button class="card-button" (click)="openDialog(item)">
+                <img src="../assets/trash-can.png" alt="Delete Item" class="button-icon">
+              </button>
+              <button (click)="image.image_blob=cardImage">+</button>
+              <mat-card-header>
+                <mat-card-title>{{ item.item_name }}</mat-card-title>
+              </mat-card-header>
+              <!-- <p>{{ item.image_blob }}</p>  -->
+
+              <img mat-card-image [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
+              <mat-card-content>
+                <p>{{ item.item_desc }}</p>
+                <div class="tags">
+                  <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+
+        <ng-template #noItems>
+          <p style="text-align: center; margin-top: 40px;">No {{selectedCategory}} available at the moment.</p>
+        </ng-template>
       </div>
 
-    </div>
-    <div class="inside-container">
-      <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
-        <div class="items-grid">
-          <mat-card *ngFor="let item of filteredInventory" class="item-card">
-            <button class="card-button" (click)="openDialog(item)">
-              <img src="../assets/trash-can.png" alt="Delete Item" class="button-icon">
-            </button>
-            <mat-card-header>
-              <mat-card-title>{{ item.item_name }}</mat-card-title>
-            </mat-card-header>
-            <!-- <p>{{ item.image_blob }}</p>  -->
 
-            <img mat-card-image [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
-            <mat-card-content>
-              <p>{{ item.item_desc }}</p>
-              <div class="tags">
-                <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
-              </div>
-            </mat-card-content>
-          </mat-card>
+    </div>
+  </div>
+
+
+  <!-- </div> -->
+  <ng-template #loggedOut>
+    <div class="auth-container">
+      <h1>Welcome to StyleMe!</h1>
+      <div *ngIf="isSignUp" class="auth-card">
+        <h2>Sign Up</h2>
+        <div class="toggle-buttons">
+          <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
+          <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
+        </div>
+        <form (ngSubmit)="onRegister(registerEmail.value, registerPassword.value, $event)">
+          <input #registerEmail type="email" placeholder="Email" required />
+          <input #registerPassword type="password" placeholder="Password" required />
+          <button type="submit" (click)="onRegister(registerEmail.value, registerPassword.value, $event)">Sign
+            Up</button>
+        </form>
+        <div class="or-section">
+          <span>OR</span>
+        </div>
+
+        <div class="social-icons">
+          <button (click)="onGoogleSignIn($event)">
+            <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
+          </button>
         </div>
       </div>
 
-      <ng-template #noItems>
-        <p style="text-align: center; margin-top: 40px;">No {{selectedCategory}} available at the moment.</p>
-      </ng-template>
+      <div *ngIf="!isSignUp" class="auth-card">
+        <h2>Login</h2>
+        <div class="toggle-buttons">
+          <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
+          <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
+        </div>
+        <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
+          <input #loginEmail type="email" placeholder="Email" required />
+          <input #loginPassword type="password" placeholder="Password" required />
+          <label style="font-family: Gowun Dodum, serif;">
+            <input type="checkbox" /> Remember Me
+          </label>
+          <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
+        </form>
+        <div class="or-section">
+          <span>OR</span>
+        </div>
+
+        <div class="social-icons">
+          <button (click)="onGoogleSignIn($event)">
+            <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
+          </button>
+        </div>
+      </div>
+
+
     </div>
 
-
-  </div>
-</div>
-
-
-<!-- </div> -->
-<ng-template #loggedOut>
-  <div class="auth-container">
-    <h1>Welcome to StyleMe!</h1>
-    <div *ngIf="isSignUp" class="auth-card">
-      <h2>Sign Up</h2>
-      <div class="toggle-buttons">
-        <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
-        <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
-      </div>
-      <form (ngSubmit)="onRegister(registerEmail.value, registerPassword.value, $event)">
-        <input #registerEmail type="email" placeholder="Email" required />
-        <input #registerPassword type="password" placeholder="Password" required />
-        <button type="submit" (click)="onRegister(registerEmail.value, registerPassword.value, $event)">Sign Up</button>
-      </form>
-      <div class="or-section">
-        <span>OR</span>
-      </div>
-
-      <div class="social-icons">
-        <button (click)="onGoogleSignIn($event)">
-          <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
-        </button>
-      </div>
-    </div>
-
-    <div *ngIf="!isSignUp" class="auth-card">
-      <h2>Login</h2>
-      <div class="toggle-buttons">
-        <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
-        <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
-      </div>
-      <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
-        <input #loginEmail type="email" placeholder="Email" required />
-        <input #loginPassword type="password" placeholder="Password" required />
-        <label style="font-family: Gowun Dodum, serif;">
-          <input type="checkbox" /> Remember Me
-        </label>
-        <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
-      </form>
-      <div class="or-section">
-        <span>OR</span>
-      </div>
-
-      <div class="social-icons">
-        <button (click)="onGoogleSignIn($event)">
-          <img src="../assets/google-icon.png" width="100" height="80" alt="Google" />
-        </button>
-      </div>
-    </div>
-
-
-  </div>
-
-</ng-template>
+  </ng-template>

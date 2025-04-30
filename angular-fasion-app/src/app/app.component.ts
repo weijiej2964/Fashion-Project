@@ -41,6 +41,8 @@ export class AppComponent implements OnInit {
   selectedCategory: string = 'top'; //default category
   inventoryByCategory: { [key: string]: any[] } = {};
   filteredInventory: InventoryItem[] = [];
+  shuffledOutfit: { [key: string]: any[] } = {} // shuffle
+
   isLoading = true; // Initial state might be loading
   isDropdownOpen: boolean = false;
 
@@ -345,6 +347,20 @@ export class AppComponent implements OnInit {
       console.error('Error creating image from blob:', error);
       return null;
     }
+  }
+
+  shuffle() {
+    let outerwear = Math.random() * (this.inventoryByCategory["outerwear"].length - 1 - 0) + 0
+    let top = Math.random() * (this.inventoryByCategory["top"].length - 1 - 0) + 0
+    let bottom = Math.random() * (this.inventoryByCategory["bottom"].length - 1 - 0) + 0
+    let shoes = Math.random() * (this.inventoryByCategory["shoes"].length - 1 - 0) + 0
+    let accessory = Math.random() * (this.inventoryByCategory["accessory"].length - 1 - 0) + 0
+
+    this.shuffledOutfit["outerwear"] = this.inventoryByCategory["outerwear"][outerwear]
+    this.shuffledOutfit["top"] = this.inventoryByCategory["top"][top]
+    this.shuffledOutfit["bottom"] = this.inventoryByCategory["bottom"][bottom]
+    this.shuffledOutfit["shoes"] = this.inventoryByCategory["shoes"][shoes]
+    this.shuffledOutfit["accessory"] = this.inventoryByCategory["accessory"][accessory]
   }
 
 
