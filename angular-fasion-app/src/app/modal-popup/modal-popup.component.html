@@ -1,0 +1,61 @@
+<!-- modal-popup.component.html -->
+
+<mat-dialog-content>
+
+  <form (ngSubmit)="submitForm()" class="form-content-inner">
+
+    <mat-form-field class="centered-field">
+      <mat-label>Item Name</mat-label>
+      <input matInput [(ngModel)]="itemName" name="itemName" required />
+    </mat-form-field>
+
+    <mat-form-field class="centered-field">
+      <mat-label>Item Description</mat-label>
+      <textarea matInput [(ngModel)]="itemDescription" name="itemDescription" rows="3"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="centered-field">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" name="category" required> <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="centered-field">
+      <mat-label>Enter Tags</mat-label>
+      <input
+        matInput
+        [(ngModel)]="newTag"
+        name="tagInput"
+        (keydown.enter)="addWord(); $event.preventDefault()" /> </mat-form-field>
+
+    <div class="tags-container">
+      <div *ngFor="let tag of tagsArray; let i = index" class="word-item">
+        <span>{{ tag }}</span>
+        <button
+          mat-icon-button  color="warn" type="button" (click)="removeTag(i); $event.stopPropagation(); $event.preventDefault();">
+          <mat-icon>close</mat-icon>
+        </button>
+        </div>
+      </div>
+
+    <div class="file-input-wrapper">
+      <button type="button" class="custom-file-button" (click)="fileInput.click()">Upload Image</button>
+      <input
+        #fileInput
+        type="file"
+        (change)="onImageUpload($event)"
+        accept=".jpg, .jpeg, .png"
+        style="display: none;"
+      />
+    </div>
+
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Preview" class="image-preview">
+
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end"> <button mat-button (click)="closeModal()">Close</button>
+
+  <button mat-raised-button color="primary" (click)="submitForm()" [disabled]="!itemName || !selectedCategory">Submit</button>
+</mat-dialog-actions>
