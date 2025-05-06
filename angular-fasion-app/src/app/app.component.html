@@ -4,23 +4,26 @@
       <img src="../assets/avatar.png" alt="Avatar" class="avatar">
       <!-- <i class="fas fa-user avatar-icon"></i> -->
     </div>
-
+<!-- shuffle -->
+    <button class="shuffle-button" (click)="shuffle()">
+      <img src="../assets/shuffle.png" width="50" height="40" alt="Shuffle icon">
+    </button>
 
     <div class="display-boxes">
       <div class="display-box-top">
-        <img *ngIf="displayedInventory[0]?.image_blob" [src]="displayedInventory[0].image_blob" alt="Top Item">
+        <img *ngIf="shuffled[0]?.image_blob" [src]="shuffled[0].image_blob" alt={{shuffled[0].item_name}}>
       </div>
       <div class="display-box-bottom">
-        <img *ngIf="displayedInventory[1]?.image_blob" [src]="displayedInventory[1].image_blob" alt="Bottom Item">
+        <img *ngIf="shuffled[1]?.image_blob" [src]="shuffled[1].image_blob" alt={{shuffled[1].item_name}}>
       </div>
       <div class="display-box-shoes">
-        <img *ngIf="displayedInventory[2]?.image_blob" [src]="displayedInventory[2].image_blob" alt="Shoes Item">
+        <img *ngIf="shuffled[2]?.image_blob" [src]="shuffled[2].image_blob" alt={{shuffled[2].item_name}}>
       </div>
       <div class="display-box-outerwear">
-        <img *ngIf="displayedInventory[3]?.image_blob" [src]="displayedInventory[3].image_blob" alt="Outerwear Item">
+        <img *ngIf="shuffled[3]?.image_blob" [src]="shuffled[3].image_blob" alt={{shuffled[3].item_name}}>
       </div>
       <div class="display-box-accessory">
-        <img *ngIf="displayedInventory[4]?.image_blob" [src]="displayedInventory[4].image_blob" alt="Accessory Item">
+        <img *ngIf="shuffled[4]?.image_blob" [src]="shuffled[4].image_blob" alt={{shuffled[4].item_name}}>
       </div>
     </div>
 

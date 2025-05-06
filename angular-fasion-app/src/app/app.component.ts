@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
   displayedInventory: InventoryItem[] = []; //top // bottom //shoes // outwear // accessory
   isLoading = true; // Initial state might be loading
   isDropdownOpen: boolean = false;
+  shuffled: Array<InventoryItem> = [];
 
 
 
@@ -369,6 +370,29 @@ export class AppComponent implements OnInit {
       return null;
     }
   }
+
+  shuffle(): Array<InventoryItem> {
+    let outerwear = Math.floor(Math.random() * this.inventoryByCategory["outerwear"].length)
+    let top = Math.floor(Math.random() * this.inventoryByCategory["top"].length)
+    let bottom = Math.floor(Math.random() * this.inventoryByCategory["bottom"].length)
+    let shoes = Math.floor(Math.random() * this.inventoryByCategory["shoes"].length)
+    let accessory = Math.floor(Math.random() * this.inventoryByCategory["accessory"].length)
+
+    // this is annoying but done because i don't want stuff to be in a random spot in the array
+    this.shuffled[0] = this.inventoryByCategory["top"][top]
+    this.shuffled[1] = this.inventoryByCategory["bottom"][bottom]
+    this.shuffled[2] = this.inventoryByCategory["outerwear"][outerwear]
+    this.shuffled[3] = this.inventoryByCategory["shoes"][shoes]
+    this.shuffled[4] = this.inventoryByCategory["accessory"][accessory]
+
+    for (let i = 0; i < this.shuffled.length; i++) {
+
+      console.log(this.shuffled[i])
+    }
+
+    return this.shuffled;
+  }
+
 
 
 }
