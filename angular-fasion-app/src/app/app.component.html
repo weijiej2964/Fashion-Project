@@ -8,19 +8,19 @@
 
     <div class="display-boxes">
       <div class="display-box-top">
-        <img *ngIf="displayedInventory[0]?.image_blob" [src]="displayedInventory[0].image_blob" alt="Top Item">
+        <img *ngIf="displayedInventory[0]?.image_blob" [src]="displayedInventory[0].image_blob" alt={{displayedInventory[0].item_name}}>
       </div>
       <div class="display-box-bottom">
-        <img *ngIf="displayedInventory[1]?.image_blob" [src]="displayedInventory[1].image_blob" alt="Bottom Item">
+        <img *ngIf="displayedInventory[1]?.image_blob" [src]="displayedInventory[1].image_blob" alt={{displayedInventory[1].item_name}}>
       </div>
       <div class="display-box-shoes">
-        <img *ngIf="displayedInventory[2]?.image_blob" [src]="displayedInventory[2].image_blob" alt="Shoes Item">
+        <img *ngIf="displayedInventory[2]?.image_blob" [src]="displayedInventory[2].image_blob" alt={{displayedInventory[2].item_name}}>
       </div>
       <div class="display-box-outerwear">
-        <img *ngIf="displayedInventory[3]?.image_blob" [src]="displayedInventory[3].image_blob" alt="Outerwear Item">
+        <img *ngIf="displayedInventory[3]?.image_blob" [src]="displayedInventory[3].image_blob" alt={{displayedInventory[3].item_name}}>
       </div>
       <div class="display-box-accessory">
-        <img *ngIf="displayedInventory[4]?.image_blob" [src]="displayedInventory[4].image_blob" alt="Accessory Item">
+        <img *ngIf="displayedInventory[4]?.image_blob" [src]="displayedInventory[4].image_blob" alt={{displayedInventory[4].item_name}}>
       </div>
     </div>
 
