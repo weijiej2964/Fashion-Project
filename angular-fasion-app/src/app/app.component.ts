@@ -385,10 +385,7 @@ export class AppComponent implements OnInit {
     this.shuffled[3] = this.inventoryByCategory["shoes"][shoes]
     this.shuffled[4] = this.inventoryByCategory["accessory"][accessory]
 
-    for (let i = 0; i < this.shuffled.length; i++) {
-
-      console.log(this.shuffled[i])
-    }
+    console.log("Shuffled outfit:", this.shuffled);
 
     return this.shuffled;
   }
