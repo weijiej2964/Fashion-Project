@@ -554,8 +554,8 @@ input[type="text"] {
   position: absolute;
   width: 120px;
   height: 120px;
-  top: 20%;
-  left: 30%;
+  top: 5%;
+  left: 20%;
   background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -569,8 +569,8 @@ input[type="text"] {
   position: absolute;
   width: 120px;
   height: 120px;
-  top: 40%;
-  left: 30%;
+  top: 30%;
+  left: 20%;
   background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -584,8 +584,8 @@ input[type="text"] {
   position: absolute;
   width: 120px;
   height: 120px;
-  top: 60%;
-  left: 30%;
+  top: 20%;
+  left: 50%;
   background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -599,8 +599,8 @@ input[type="text"] {
   position: absolute;
   width: 120px;
   height: 120px;
-  top: 30%;
-  left: 60%;
+  top: 55%;
+  left: 20%;
   background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -614,8 +614,8 @@ input[type="text"] {
   position: absolute;
   width: 120px;
   height: 120px;
-  top: 50%;
-  left: 60%;
+  top: 45%;
+  left: 50%;
   background-color: transparent;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -623,4 +623,17 @@ input[type="text"] {
   justify-content: center;
   align-items: center;
   text-overflow: clip;
+}
+
+.display-box-top img,
+.display-box-bottom img,
+.display-box-shoes img,
+.display-box-outerwear img,
+.display-box-accessory img {
+  width: 140px;
+  height: 140px;
+  /* max-width: 100%;
+  max-height: 100%; */
+  object-fit: cover;
+
 }
