@@ -3,7 +3,27 @@
     <div class="avatar-container" (click)="toggleUserInfo()">
       <img src="../assets/avatar.png" alt="Avatar" class="avatar">
       <!-- <i class="fas fa-user avatar-icon"></i> -->
+    </div>
+
+
+    <div class="display-boxes">
+      <div class="display-box-top">
+        <img *ngIf="displayedInventory[0]?.image_blob" [src]="displayedInventory[0].image_blob" alt="Top Item">
       </div>
+      <div class="display-box-bottom">
+        <img *ngIf="displayedInventory[1]?.image_blob" [src]="displayedInventory[1].image_blob" alt="Bottom Item">
+      </div>
+      <div class="display-box-shoes">
+        <img *ngIf="displayedInventory[2]?.image_blob" [src]="displayedInventory[2].image_blob" alt="Shoes Item">
+      </div>
+      <div class="display-box-outerwear">
+        <img *ngIf="displayedInventory[3]?.image_blob" [src]="displayedInventory[3].image_blob" alt="Outerwear Item">
+      </div>
+      <div class="display-box-accessory">
+        <img *ngIf="displayedInventory[4]?.image_blob" [src]="displayedInventory[4].image_blob" alt="Accessory Item">
+      </div>
+    </div>
+
 
     <div *ngIf="showUserInfo" class="user-info-popup">
       <p style="font-family: Gowun Dodum, serif; font-size: 15px;">Hello, {{ user.email }}!</p>
@@ -16,12 +36,13 @@
     <div class="edit-icon"></div>
   </div>
 
- 
-  <button mat-button (click)="openModal()" id = "add-icon"><img src="../assets/add-icon.png" width="50" height="40" alt="Add icon"></button> 
+
+  <button mat-button (click)="openModal()" id="add-icon"><img src="../assets/add-icon.png" width="50" height="40"
+      alt="Add icon"></button>
   <!-- <button class="icon-button add-container" id="addPopup">
     <img src="../assets/add-icon.png" width="50" height="40" alt="Add icon">
   </button> -->
-  
+
   <!-- <div id="add-popup" class="popup">
     <div class="popup-content">
       <span id="closePopupBtn" class="close-btn">&times;</span>
@@ -47,9 +68,9 @@
       </form>
     </div>
   </div> -->
-  
+
   <!-- <script src="add-popup.js"></script> Link to the JS file -->
-  
+
 
   <div class="basic-container" style="font-family: Gowun Dodum, serif;">
     <div class="search-bar-container">
@@ -58,7 +79,7 @@
       <button class="clear-button" (click)="clearTags()">Clear</button>
     </div>
 
-    <div class ="tag-container">
+    <div class="tag-container">
       <div class="display-tag" *ngFor="let tag of tags" (click)="deleteTag(tag)"> {{ tag }}</div>
     </div>
 
@@ -70,7 +91,7 @@
       <button class="button" (click)="selectCategory('shoes')">Shoes</button>
     </div>
 
-     <!-- <div class="inside-container">
+    <!-- <div class="inside-container">
        app.component.html 
       <div *ngIf="filteredInventory">
         <div class="items-grid">
@@ -104,37 +125,37 @@
       </div>
 
     </div>
-      <div class="inside-container">
-        <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
-          <div class="items-grid">
-            <mat-card *ngFor="let item of filteredInventory" class="item-card">
-              <button class="card-button" (click)="openDialog(item)">
-                <img src="../assets/trash-can.png" alt="Delete Item" class="button-icon">
-              </button>
-              <mat-card-header>
-                <mat-card-title>{{ item.item_name }}</mat-card-title>
-              </mat-card-header>
-              <!-- <p>{{ item.image_blob }}</p>  -->
+    <div class="inside-container">
+      <div *ngIf="(filteredInventory?.length ?? 0) > 0; else noItems">
+        <div class="items-grid">
+          <mat-card *ngFor="let item of filteredInventory" class="item-card">
+            <button class="card-button" (click)="openDialog(item)">
+              <img src="../assets/trash-can.png" alt="Delete Item" class="button-icon">
+            </button>
+            <mat-card-header>
+              <mat-card-title>{{ item.item_name }}</mat-card-title>
+            </mat-card-header>
+            <!-- <p>{{ item.image_blob }}</p>  -->
 
-              <img mat-card-image [src]="item.image_blob" alt="{{ item.item_name }}"  class="item-image">
-              <mat-card-content>
-                <p>{{ item.item_desc }}</p>
-                <div class="tags">
-                  <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </div>
+            <img mat-card-image [src]="item.image_blob" alt="{{ item.item_name }}" class="item-image">
+            <mat-card-content>
+              <p>{{ item.item_desc }}</p>
+              <div class="tags">
+                <span *ngFor="let tag of item.tags" class="tag">{{ tag }}</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
         </div>
-
-        <ng-template #noItems>
-          <p style = "text-align: center; margin-top: 40px;">No {{selectedCategory}} available at the moment.</p>
-        </ng-template>
       </div>
 
-
+      <ng-template #noItems>
+        <p style="text-align: center; margin-top: 40px;">No {{selectedCategory}} available at the moment.</p>
+      </ng-template>
     </div>
+
+
   </div>
+</div>
 
 
 <!-- </div> -->
@@ -172,8 +193,8 @@
       <form (ngSubmit)="onLogin(loginEmail.value, loginPassword.value, $event)">
         <input #loginEmail type="email" placeholder="Email" required />
         <input #loginPassword type="password" placeholder="Password" required />
-        <label style = "font-family: Gowun Dodum, serif;">
-          <input type="checkbox"/> Remember Me
+        <label style="font-family: Gowun Dodum, serif;">
+          <input type="checkbox" /> Remember Me
         </label>
         <button type="submit" (click)="onLogin(loginEmail.value, loginPassword.value, $event)">Login</button>
       </form>

@@ -36,13 +36,16 @@ export class AppComponent implements OnInit {
   user: User | null = null;
   isSignUp: boolean = false;
 
-  categories: string[] = ['Top', 'Bottom', 'Outerwear', 'Accessory', 'Shoes']; 
+  categories: string[] = ['Top', 'Bottom', 'Outerwear', 'Accessory', 'Shoes'];
 
   selectedCategory: string = 'top'; //default category
   inventoryByCategory: { [key: string]: any[] } = {};
   filteredInventory: InventoryItem[] = [];
+  displayedInventory: InventoryItem[] = []; //top // bottom //shoes // outwear // accessory
   isLoading = true; // Initial state might be loading
   isDropdownOpen: boolean = false;
+
+
 
   searchResults: InventoryItem[] = [];
   selectedTag: string = '';
@@ -55,12 +58,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getUser().subscribe(user => {
-       this.user = user;
-       if (user) {
-         this.loadHomeData(); // Load data if user is already logged in on init
-       } else {
-         this.isLoading = false; // Stop loading if no user
-       }
+      this.user = user;
+      if (user) {
+        this.loadHomeData(); // Load data if user is already logged in on init
+      } else {
+        this.isLoading = false; // Stop loading if no user
+      }
     });
   }
 
@@ -123,7 +126,7 @@ export class AppComponent implements OnInit {
     this.authService.login(email, password).subscribe({
       next: (user) => {
         console.log('User logged in:', user);
-        this.loadHomeData(); 
+        this.loadHomeData();
       },
       error: (err) => console.error('Login failed:', err)
     });
@@ -154,6 +157,27 @@ export class AppComponent implements OnInit {
           this.filterInventory(); // Filter after loading new data
           console.log('filtered inventory:', this.filteredInventory);
           this.isLoading = false; // Hide loading indicator
+
+
+          //development, display testing
+          if (Array.isArray(this.inventoryByCategory['top']) && this.inventoryByCategory['top'].length > 0)
+            this.displayedInventory.push(this.inventoryByCategory['top'][0]);
+
+          if (Array.isArray(this.inventoryByCategory['bottom']) && this.inventoryByCategory['bottom'].length > 0)
+            this.displayedInventory.push(this.inventoryByCategory['bottom'][0]);
+
+          if (Array.isArray(this.inventoryByCategory['shoes']) && this.inventoryByCategory['shoes'].length > 0)
+            this.displayedInventory.push(this.inventoryByCategory['shoes'][0]);
+
+          if (Array.isArray(this.inventoryByCategory['outerwear']) && this.inventoryByCategory['outerwear'].length > 0)
+            this.displayedInventory.push(this.inventoryByCategory['outerwear'][0]);
+
+          if (Array.isArray(this.inventoryByCategory['accessory']) && this.inventoryByCategory['accessory'].length > 0)
+            this.displayedInventory.push(this.inventoryByCategory['accessory'][0]);
+
+          console.log("this is test:", this.displayedInventory);
+
+
         },
         error: (err) => {
           console.error('Error loading inventory:', err);
@@ -189,21 +213,21 @@ export class AppComponent implements OnInit {
     for (const category in rawData) {
       if (rawData.hasOwnProperty(category)) {
         // Ensure category exists in your categories list if needed, or handle dynamically
-         if (!this.categories.includes(category)) {
-             // Optional: Add new categories found in data to your categories list
-             // this.categories.push(category);
-             console.warn(`Category "${category}" found in DB but not in local categories list.`);
-         }
+        if (!this.categories.includes(category)) {
+          // Optional: Add new categories found in data to your categories list
+          // this.categories.push(category);
+          console.warn(`Category "${category}" found in DB but not in local categories list.`);
+        }
 
         result[category] = [];
 
         const items = rawData[category];
         for (const itemId in items) {
           if (items.hasOwnProperty(itemId)) {
-             // Cast or ensure the item structure matches InventoryItem
+            // Cast or ensure the item structure matches InventoryItem
             const item: InventoryItem = {
-               id: itemId, // Use the key from the DB as the item ID
-               ...items[itemId]
+              id: itemId, // Use the key from the DB as the item ID
+              ...items[itemId]
             };
             result[category].push(item);
           }
@@ -221,16 +245,16 @@ export class AppComponent implements OnInit {
   }
 
   filterInventory() {
-     this.filteredInventory = this.inventoryByCategory[this.selectedCategory] || [];
-     this.filterInventoryByTags();
+    this.filteredInventory = this.inventoryByCategory[this.selectedCategory] || [];
+    this.filterInventoryByTags();
   }
 
-///////////Search bar functionality////////////
-/// This function filters the inventory based on the search term entered by the user.
-// selectTag(tag: string) { // This seems less used now with the tags array logic
-//   this.selectedTag = tag;
-//   this.filterInventoryByTag(); // Call filtering based on THIS tag
-// }}
+  ///////////Search bar functionality////////////
+  /// This function filters the inventory based on the search term entered by the user.
+  // selectTag(tag: string) { // This seems less used now with the tags array logic
+  //   this.selectedTag = tag;
+  //   this.filterInventoryByTag(); // Call filtering based on THIS tag
+  // }}
 
   filterInventoryByTags() {
     // Start with the inventory for the selected category
@@ -265,10 +289,10 @@ export class AppComponent implements OnInit {
     this.selectedTag = '';
     this.filterInventoryByTags(); // Reset inventory display
   }
-  deleteTag(tagToRemove: string){
-      // Remove the clicked tag from the tags array
-      this.tags = this.tags.filter(tag => tag !== tagToRemove);
-      this.filterInventoryByTags(); // Re-filter after removing a tag
+  deleteTag(tagToRemove: string) {
+    // Remove the clicked tag from the tags array
+    this.tags = this.tags.filter(tag => tag !== tagToRemove);
+    this.filterInventoryByTags(); // Re-filter after removing a tag
   }
 
 
@@ -294,19 +318,19 @@ export class AppComponent implements OnInit {
       this.inventoryByCategory[this.selectedCategory] = (this.inventoryByCategory[this.selectedCategory] || []).filter(
         item => item.id !== itemToDelete.id
       );
-      this.filterInventoryByTags(); 
+      this.filterInventoryByTags();
 
       console.log(`Item "${itemToDelete.item_name}" removed from frontend view.`);
 
-      if (this.user?.uid && itemToDelete.id) { 
+      if (this.user?.uid && itemToDelete.id) {
         this.apiService.deleteInventory(this.user.uid, this.selectedCategory, itemToDelete.id).subscribe({
           next: (res) => {
             console.log(`"${itemToDelete.item_name}" was successfully deleted from DB!`);
           },
           error: (err) => {
             console.error(`Failed to delete item from DB:`, err);
-             console.log('DB deletion failed, attempting to resync inventory...');
-             this.loadHomeData();
+            console.log('DB deletion failed, attempting to resync inventory...');
+            this.loadHomeData();
           }
         });
       } else {
@@ -316,7 +340,7 @@ export class AppComponent implements OnInit {
         this.loadHomeData(); // Reload data to revert the optimistic deletion
       }
     } else {
-         console.warn("Cannot delete item: Selected category or inventory data missing.");
+      console.warn("Cannot delete item: Selected category or inventory data missing.");
     }
   }
 
@@ -325,27 +349,27 @@ export class AppComponent implements OnInit {
       console.error('No image blob found in inventory item.');
       return null; // Return null if image_blob is missing
     }
-  
+
     try {
-      const blob = new Blob([inventoryItem.image_blob], { type: 'image/png' }); 
+      const blob = new Blob([inventoryItem.image_blob], { type: 'image/png' });
       const blobURL = URL.createObjectURL(blob);
-  
+
       const img = document.createElement('img');
       img.src = blobURL;
       img.alt = 'Inventory Item Image';
       img.style.width = '300px'; // Example: adjust size
       img.style.height = 'auto';
-  
+
       // Optional: Revoke the Blob URL later to free up resources
       setTimeout(() => URL.revokeObjectURL(blobURL), 10000);
-  
+
       return img;
     } catch (error) {
       console.error('Error creating image from blob:', error);
       return null;
     }
   }
-  
+
 
 }
 
