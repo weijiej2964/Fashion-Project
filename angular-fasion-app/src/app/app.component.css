@@ -547,6 +547,7 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: clip;
 }
 
 .display-box-top {
@@ -561,6 +562,7 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: clip;
 }
 
 .display-box-bottom {
@@ -575,6 +577,7 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: clip;
 }
 
 .display-box-shoes {
@@ -589,6 +592,7 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: clip;
 }
 
 .display-box-outerwear {
@@ -603,6 +607,7 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: clip;
 }
 
 .display-box-accessory {
@@ -617,4 +622,5 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-overflow: clip;
 }

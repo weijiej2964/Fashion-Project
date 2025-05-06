@@ -161,22 +161,22 @@ export class AppComponent implements OnInit {
 
 
           //development, display testing
-          if (Array.isArray(this.inventoryByCategory['top']) && this.inventoryByCategory['top'].length > 0)
-            this.displayedInventory.push(this.inventoryByCategory['top'][0]);
+          // if (Array.isArray(this.inventoryByCategory['top']) && this.inventoryByCategory['top'].length > 0)
+          //   this.displayedInventory.push(this.inventoryByCategory['top'][0]);
 
-          if (Array.isArray(this.inventoryByCategory['bottom']) && this.inventoryByCategory['bottom'].length > 0)
-            this.displayedInventory.push(this.inventoryByCategory['bottom'][0]);
+          // if (Array.isArray(this.inventoryByCategory['bottom']) && this.inventoryByCategory['bottom'].length > 0)
+          //   this.displayedInventory.push(this.inventoryByCategory['bottom'][0]);
 
-          if (Array.isArray(this.inventoryByCategory['shoes']) && this.inventoryByCategory['shoes'].length > 0)
-            this.displayedInventory.push(this.inventoryByCategory['shoes'][0]);
+          // if (Array.isArray(this.inventoryByCategory['shoes']) && this.inventoryByCategory['shoes'].length > 0)
+          //   this.displayedInventory.push(this.inventoryByCategory['shoes'][0]);
 
-          if (Array.isArray(this.inventoryByCategory['outerwear']) && this.inventoryByCategory['outerwear'].length > 0)
-            this.displayedInventory.push(this.inventoryByCategory['outerwear'][0]);
+          // if (Array.isArray(this.inventoryByCategory['outerwear']) && this.inventoryByCategory['outerwear'].length > 0)
+          //   this.displayedInventory.push(this.inventoryByCategory['outerwear'][0]);
 
-          if (Array.isArray(this.inventoryByCategory['accessory']) && this.inventoryByCategory['accessory'].length > 0)
-            this.displayedInventory.push(this.inventoryByCategory['accessory'][0]);
+          // if (Array.isArray(this.inventoryByCategory['accessory']) && this.inventoryByCategory['accessory'].length > 0)
+          //   this.displayedInventory.push(this.inventoryByCategory['accessory'][0]);
 
-          console.log("this is test:", this.displayedInventory);
+          // console.log("this is test:", this.displayedInventory);
 
 
         },
