@@ -5,9 +5,9 @@
       <!-- <i class="fas fa-user avatar-icon"></i> -->
     </div>
 <!-- shuffle -->
-    <button class="shuffle-button" (click)="shuffle()">
+    <!-- <button class="shuffle-button" (click)="shuffle()">
       <img src="../assets/shuffle.png" width="50" height="40" alt="Shuffle icon">
-    </button>
+    </button> -->
 
     <div class="display-boxes">
       <div class="display-box-top">
@@ -41,6 +41,10 @@
 
   <button mat-button (click)="openModal()" id="add-icon"><img src="../assets/add-icon.png" width="50" height="40"
       alt="Add icon"></button>
+      <div class="icon-container">
+        <button mat-button (click)="shuffle()"><img src="../assets/shuffle.png" width="50" height="40" alt="shuffle-icon"></button>
+        <!-- <div class="edit-icon"></div> -->
+      </div>
   <!-- <button class="icon-button add-container" id="addPopup">
     <img src="../assets/add-icon.png" width="50" height="40" alt="Add icon">
   </button> -->
