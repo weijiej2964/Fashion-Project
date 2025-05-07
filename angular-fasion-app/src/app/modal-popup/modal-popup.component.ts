@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http'; // HttpClientModule is imported here
 import { ApiService } from '../api.service';
 import { AuthService } from '../auth.service';
-
+import { GoogleGenAI, Modality } from "@google/genai";
 @Component({
   selector: 'app-modal-popup',
   standalone: true,
@@ -34,7 +34,9 @@ import { AuthService } from '../auth.service';
 
   encapsulation: ViewEncapsulation.None
 })
+
 export class ModalPopupComponent {
+  ai: GoogleGenAI = new GoogleGenAI({ apiKey: "AIzaSyBwb9xmOpq1qQ_mNb__1FUr7h3MHvMcmbY" });
   itemName: string = '';
   itemDescription: string = '';
   selectedCategory: string = '';
@@ -105,7 +107,103 @@ export class ModalPopupComponent {
       // this.dialogRef.close(); // <--- REMOVE THIS LINE
     });
   }
+  removeBG(): void {
+    const contents = [
+      { text: 'Can you remove the background from this image of a clothing item? I want the background to be the color #fdf1f2, which is a very light pink' },
+      {
+        inlineData: {
+          mimeType: 'image/png', // Correct MIME type
+          data: this.imageBase64?.split(',')[1] ?? '',
+        },
+      },
+    ];
+  
+    this.ai.models.generateContent({
+      model: "gemini-2.0-flash-preview-image-generation",
+      contents: contents,
+      config: {
+        responseModalities: ['TEXT', 'IMAGE'],
+      },
+    }).then(response => {
+      console.log('Full API Response:', response);
+    
+      // Ensure response and candidates exist before accessing them
+      if (response?.candidates && Array.isArray(response.candidates) && response.candidates.length > 0) {
+        const candidate = response.candidates[0]; // Safely extract first candidate
+    
+        if (candidate?.content?.parts && Array.isArray(candidate.content.parts)) {
+          candidate.content.parts.forEach(part => {
+            if (part.inlineData) {
+              const imageData = part.inlineData.data;
+             // this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(`data:image/png;base64,${imageData}`);
 
+              this.imageBase64 = `data:image/png;base64,${imageData}`;
+              this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.imageBase64);
+              console.log('Modified image updated!');
+            } else if (part.text) {
+              console.log('Gemini AI Response:', part.text);
+            }
+          });
+        } else {
+          console.error('No content parts found in response.');
+        }
+      } else {
+        console.error('No candidates found in response.');
+      }
+    }).catch(error => {
+      console.error('Error modifying image with Gemini:', error);
+    });
+    
+  }
+  
+  // async removeBG(): Promise<void> {
+    
+  //   const contents = [
+  //     { text: 'Can you add a llama next to the image?' },
+  //     {
+  //       inlineData: {
+  //         mimeType: 'base64',
+  //         data: this.imageBase64 ?? '',
+  //       },
+  //     },
+  //   ];
+    
+
+  //   this.ai.models.generateContent({
+  //     model: 'gemini-2.0-flash-preview-image-generation',
+  //     contents: contents,
+  //     config: {
+  //       responseModalities: ['TEXT', 'IMAGE'],
+  //     },
+  //   }).then(response => {
+  //     console.log('Full API Response:', response);
+  //   }).catch(error => {
+  //     console.error('Error modifying image with Gemini:', error);
+  //   });
+
+  //   const response = await this.ai.models.generateContent({
+  //     model: "gemini-2.0-flash-preview-image-generation",
+  //     contents: contents,
+  //     config: {
+  //       responseModalities: [Modality.TEXT, Modality.IMAGE],
+  //     },
+  //   });
+  //   for (const part of response.candidates[0].content.parts) {
+  //     // Based on the part type, either show the text or save the image
+  //     if (part.text) {
+  //       console.log(part.text);
+  //     } else if (part.inlineData) {
+  //       const imageData = part.inlineData.data;
+        
+  //       // const buffer = Buffer.from(imageData, "base64");
+  //       // fs.writeFileSync("gemini-native-image.png", buffer);
+        
+  //       console.log("Image saved as gemini-native-image.png");
+  //     }
+  //   }
+    
+  // }
+  
   // ... (rest of your methods: addWord, removeTag, onImageUpload)
   addWord(): void {
     if (this.newTag.trim() && !this.tagsArray.includes(this.newTag.trim())) {
@@ -160,7 +258,7 @@ export class ModalPopupComponent {
           // Convert canvas to Base64
           this.imageBase64 = canvas.toDataURL(file.type);
           this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(this.imageBase64);
-
+          this.removeBG();
           console.log('Resized Base64 Image:', this.imageBase64);
         };
       };
