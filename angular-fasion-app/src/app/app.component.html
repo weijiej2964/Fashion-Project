@@ -1,4 +1,4 @@
-<div *ngIf="user; else loggedOut" style="font-family: Gowun Dodum, serif;">
+<div *ngIf="user; else loggedOut">
   <div class="user-profile-section">
     <div class="avatar-container" (click)="toggleUserInfo()">
       <img src="../assets/avatar.png" alt="Avatar" class="avatar">
@@ -171,8 +171,9 @@
   <div class="auth-container">
     <h1>Welcome to StyleMe!</h1>
     <div *ngIf="isSignUp" class="auth-card">
-      <h2>Sign Up</h2>
-      <div class="toggle-buttons">
+      <img src="../assets/logo.png" alt="logo" class = "logo-img">
+      <!-- <h2>Sign Up</h2> -->
+      <div class="toggle-buttons" style = "padding-top: 15px;">
         <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
         <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
       </div>
@@ -193,8 +194,9 @@
     </div>
 
     <div *ngIf="!isSignUp" class="auth-card">
-      <h2>Login</h2>
-      <div class="toggle-buttons">
+      <img src="../assets/logo.png" alt="logo" class = "logo-img">
+      <!-- <h2>Login</h2> -->
+      <div class="toggle-buttons" style = "padding-top: 15px;">
         <button class="toggle-button" [class.active]="isSignUp" (click)="switchToSignup()">Sign Up</button>
         <button class="toggle-button" [class.active]="!isSignUp" (click)="switchToLogin()">Login</button>
       </div>
