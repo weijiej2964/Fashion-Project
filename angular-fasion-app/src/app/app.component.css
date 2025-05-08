@@ -532,3 +532,10 @@ font-size: 24px;
   font-family: "Gowun Dodum", serif;
 }
 
+.logo-img {
+  border-radius: 50%;
+  height: 30%;
+  width: 30%;
+  align-items: center;
+  margin-left: 110px;
+}
