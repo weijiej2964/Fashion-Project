@@ -1,6 +1,6 @@
 # StyleMe 👗👕
 
-> A full-stack wardrobe management web application built for **Google CodeFest**
+> StyleMe is a full-stack wardrobe management web application built for the **Google CodeFest** that allows users to digitally organize their clothing inventory and generate randomized outfit combinations on demand.
 
 ## 📱 Demo
 [Watch the demo here](https://drive.google.com/file/d/1Hox0GU5vjn6Zmxep-Tz5oX5rOxcfNtbc/view?usp=sharing)
