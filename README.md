@@ -1,6 +1,27 @@
-# Welcome to StyleMe! 👗👕
-We participated in the Google CodeFest by creating a fashion project called StyleMe that helps users organize their clothes on their inventory and generate different outfit combinations of their choosing. 
+# StyleMe 👗👕
 
-We used REST APIs to create the endpoints for adding, deleting, shuffle clothing items, Node.js and Express.js to run the web application in the backend, and AngularJS for frontend development. We also used Firebase for user's authentication and to store their information in a database.
+> A full-stack wardrobe management web application built for **Google CodeFest**
 
-[Here's a demo of our app!](https://drive.google.com/file/d/1Hox0GU5vjn6Zmxep-Tz5oX5rOxcfNtbc/view?usp=sharing)
+## 📱 Demo
+[Watch the demo here](https://drive.google.com/file/d/1Hox0GU5vjn6Zmxep-Tz5oX5rOxcfNtbc/view?usp=sharing)
+
+---
+
+## ✨ Features
+- Add, delete, and manage clothing items in a personal wardrobe inventory
+- Shuffle and generate randomized outfit combinations from saved items
+- Secure user authentication with persistent data storage per account
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | AngularJS |
+| Backend | Node.js, Express.js |
+| Database | Firebase Firestore |
+| Authentication | Firebase Authentication |
+| API | RESTful endpoints |
+
+---
